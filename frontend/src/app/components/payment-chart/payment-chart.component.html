@@ -1,0 +1,6 @@
+<div *ngIf="isLoading; else content">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<ng-template #content>
+<div class="payment-chart" *ngIf="isBrowser && chartOption" echarts [options]="chartOption"></div>
+</ng-template>

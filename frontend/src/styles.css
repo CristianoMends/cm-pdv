@@ -1,0 +1,58 @@
+body,
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background: url('./assets/background.jpg');
+    background-size: cover;
+    overflow: hidden;
+}
+.section{
+    background: #ffffffe1;
+}
+:root {
+    --primary-color: linear-gradient(to bottom, #5783fd, #b7c9fc);
+}
+
+input {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:focus {
+  outline: none;
+  border: none;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #1b3fa3bb;
+    border-radius: 10px;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    position: relative;
+}

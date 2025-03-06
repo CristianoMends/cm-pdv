@@ -1,0 +1,12 @@
+<div *ngIf="isLoading; else content">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<ng-template #content>
+    <div class="sale-register-box" #content>
+        <div class="container">
+            <app-item-selection [items]="products" (addSale)="addItem($event)" [selectedItemsMap]="selectedItemsMap"></app-item-selection>
+            <app-sale-summary [productSales]="productSales" (updateItemQuantity)="updateQuantity($event)" (removeItem)="removeItem($event)" (proceedToPayment)="proceedToPayment()"></app-sale-summary>
+        </div>
+    </div>
+    <app-message #message></app-message>
+</ng-template>

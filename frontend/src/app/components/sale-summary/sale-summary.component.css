@@ -1,0 +1,78 @@
+.sale-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+    width: 450px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    border-radius: 5px;
+    height: 90%;
+    margin: 0 10px 10px 10px;
+  }
+  
+  .sale-summary h3 {
+    margin-bottom: 10px;
+  }
+  
+  .sale-summary ul {
+    list-style: none;
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+    max-height: 700px;
+  }
+  
+  .sale-summary li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .sale-summary li div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sale-summary div div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .sale-summary .btn-payment {
+    background: #194267e6;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  .sale-summary .btn-payment:hover {
+    background: darkblue;
+  }
+  .qtd-input{
+    width: 50px;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .sale-summary .btn-remove{
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    color: black;
+    background: transparent;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  

@@ -1,0 +1,18 @@
+<div class="side-menu">
+    <div [class]="selected==''?'btn selected':'btn'" (click)="navigateTo('')">
+        <img src="https://img.icons8.com/?size=100&id=59809&format=png&color=FFFFFF" alt="" height="75%">
+        <h2>Inicio</h2>
+    </div>
+    <div [class]="selected=='sales'?'btn selected':'btn'" (click)="navigateTo('sales')">
+        <img src="https://img.icons8.com/?size=100&id=8434&format=png&color=FFFFFF" alt="" height="75%">
+        <h2>Vendas</h2>
+    </div>
+    <div [class]="selected=='products'?'btn selected':'btn'" (click)="navigateTo('products')">
+        <img src="https://img.icons8.com/?size=100&id=8440&format=png&color=FFFFFF" alt="" height="75%">
+        <h2>Produtos</h2>
+    </div>
+    <div [class]="selected=='reports'?'btn selected':'btn'" (click)="navigateTo('reports')">
+        <img src="https://img.icons8.com/?size=100&id=57715&format=png&color=FFFFFF" alt="" height="75%">
+        <h2>Relatórios</h2>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+.itens-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+    overflow-x: hidden;
+    height: 90%;
+    width: 100%;
+    margin: 0 10px 10px 10px;
+
+  }
+  
+  .item {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 5px;
+    background-color: white;
+  }
+  
+  .item img {
+    width: 100%;
+    object-fit: cover;
+    mix-blend-mode: normal;
+  }
+  
+  .selecionado {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .image-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .item-quantity {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15px;
+    width: 15px;
+    top: 2px;
+    right: 2px;
+    background: #194267e6;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+  
+  .filters{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    border: 1px solid #ddd;
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    margin-left: 25%;
+  }
+  .filters input{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }

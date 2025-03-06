@@ -1,0 +1,18 @@
+
+<div class="filters">
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar por nome..." />
+  <input type="number" [(ngModel)]="minPrice" placeholder="Preço mínimo" />
+  <input type="number" [(ngModel)]="maxPrice" placeholder="Preço máximo" />
+</div>
+
+<div class="itens-container">
+  <div *ngFor="let item of filteredItems" class="item" (click)="selectItem(item)">
+    <div class="image-wrapper">
+      <img [src]="item.image" [alt]="item.name">
+
+      <span *ngIf="getItemQuantity(item) > 0" class="item-quantity">{{ getItemQuantity(item) }}</span>
+    </div>
+    <p>{{ item.name }}</p>
+    <!--<p>R$ {{ item.price | number:'1.2-2' }}</p>-->
+  </div>
+</div>
