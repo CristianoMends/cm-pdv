@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -81,6 +82,12 @@ public class UserController implements UserDoc {
         var userDto = new UpdateUserDto(id, name, surname, phone, email, status, access, password);
         userService.updateUser(userDto);
         return ResponseEntity.noContent().build();
+    }
+
+    @CrossOrigin
+    @GetMapping("/logged")
+    public ResponseEntity<ViewUserDto> getLogged(){
+        return ResponseEntity.ok(Optional.of(this.userService.getLoggedUser()).map(User::toView).get());
     }
 
 }
