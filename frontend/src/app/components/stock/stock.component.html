@@ -1,0 +1,91 @@
+<div class="stock-container">
+
+  <div class="add-product-form">
+
+    <form (ngSubmit)="addProduct()">
+      <div class="form-group">
+        <label for="productName">Nome do Produto</label>
+        <input type="text" id="productName" [(ngModel)]="newProduct.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="productPrice">Preço de Venda</label>
+        <input type="number" id="productPrice" [(ngModel)]="newProduct.price" name="price" required>
+      </div>
+      <div class="form-group">
+        <label for="productCost">Preço de Custo</label>
+        <input type="number" id="productCost" [(ngModel)]="newProduct.cost" name="cost" required>
+      </div>
+      <div class="form-group">
+        <label for="productUnit">Unidade</label>
+        <input type="text" id="productUnit" [(ngModel)]="newProduct.unit" name="unit" required>
+      </div>
+
+      <div class="form-group">
+        <label for="productCategory">Categoria</label>
+
+        <!-- Select com opção para adicionar nova categoria -->
+        <select id="productCategory" [(ngModel)]="newProduct.category.id" name="category" required
+          (change)="onCategoryChange(newProduct.category.id)">
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          <option value="new" *ngIf="!addNewCategory">Adicionar nova categoria...</option>
+        </select>
+        
+        <!-- Campo de entrada para adicionar nova categoria -->
+        <div class="new-category-container" *ngIf="addNewCategory">
+          <input type="text" id="newCategory" [(ngModel)]="newCategoryName" name="newCategory"
+            placeholder="Digite o nome da nova categoria" />
+          <button (click)="addNewCategoryFunction()">Adicionar Nova Categoria</button>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="productBrand">Marca</label>
+        <input type="text" id="productBrand" [(ngModel)]="newProduct.brand" name="brand" required>
+      </div>
+      <div class="form-group">
+        <label for="productImage">Imagem</label>
+        <input type="file" id="productImage" accept="image/*" [(ngModel)]="newProduct.image" name="image" required>
+      </div>
+      <button type="submit">Adicionar Produto</button>
+    </form>
+  </div>
+
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Preço</th>
+        <th>Custo</th>
+        <th>Lucro estimado</th>
+        <th>Unidade</th>
+        <th>Quantidade Inicial</th>
+        <th>Entradas</th>
+        <th>Saídas</th>
+        <th>Quantidade Atual</th>
+        <th>Categoria</th>
+        <th>Marca</th>
+        <th>Data de Registro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stock of stockList">
+        <td>
+          <img [src]="stock.product.image" alt="Imagem do produto" height="50px">
+          {{ stock.product.name }}
+        </td>
+        <td>{{ stock.product.price | currency : 'BRL'}}</td>
+        <td>{{ stock.product.cost | currency : 'BRL' }}</td>
+        <td>{{ stock.product.price - stock.product.cost | currency : 'BRL' }}</td>
+        <td>{{ stock.product.unit }}</td>
+        <td>{{ stock.initialQuantity }}</td>
+        <td>{{ stock.totalEntries }}</td>
+        <td>{{ stock.totalWithdrawals }}</td>
+        <td>{{ stock.currentQuantity }}</td>
+        <td>{{ stock.product.category.name }}</td>
+        <td>{{ stock.product.brand }}</td>
+        <td>{{ stock.product.createdAt | date: 'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

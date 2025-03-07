@@ -1,0 +1,175 @@
+.stock-container {
+  padding: 20px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #f9f9f9;
+}
+
+.stock-table th,
+.stock-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.stock-table th {
+  background-color: #194267;
+  color: white;
+}
+
+.stock-table td img {
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.stock-table td {
+  vertical-align: middle;
+}
+
+.stock-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+
+/*estilo do form*/
+.add-product-form {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-form form {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+
+}
+
+.add-product-form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-product-form .form-group {
+  margin-bottom: 15px;
+  width: 300px;
+  height: max-content;
+}
+
+.add-product-form label {
+  display: block;
+  font-weight: bold;
+}
+
+.add-product-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.add-product-form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #194267;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.add-product-form button[type="submit"] {
+  margin: 0 25%;
+  height: max-content;
+}
+
+.add-product-form button:hover {
+  background-color: #333;
+}
+
+.add-product-form input[type="file"] {
+  width: 100%;
+  padding: 11px;
+  margin: 5px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #194267;
+  cursor: pointer;
+  color: white;
+}
+
+.add-product-form input[type="file"]::-webkit-file-upload-button {
+  border: none;
+  color: white;
+  background-color: transparent;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-product-form input[type="file"]:hover {
+  background-color: #333;
+}
+
+
+.add-product-form select {
+  width: 100%;
+  padding: 11px;
+  margin: 5px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.new-category-container {
+  margin-top: 10px;
+  width: 100%;
+  animation: fadeIn 0.5s;
+  transform: translateX(5px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+.add-product-form .form-group {
+  margin-bottom: 15px;
+  width: calc(30% - 20px); /* Dividir igualmente os campos */
+  min-width: 250px;  /* Garantir que os campos não fiquem muito pequenos */
+}
+
+.new-category-container input,
+.new-category-container button {
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+}

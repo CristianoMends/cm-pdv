@@ -12,4 +12,9 @@
 }
 .section .d2{
     width: 100%;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+.isload{
+    height: 100%;
 }

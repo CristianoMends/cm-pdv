@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-    width: 450px;
+  width: 24vw;  
     padding: 10px;
     border: 1px solid #ccc;
     background: #f9f9f9;
     border-radius: 5px;
-    height: 90%;
+    height: 100%;
+    max-height: 85vh;
     margin: 0 10px 10px 10px;
   }
   
@@ -28,7 +29,20 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5px;
+
+    animation: fade 0.1s linear;
   }
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+    
+  }
+
   .sale-summary li div{
     display: flex;
     justify-content: center;
@@ -54,7 +68,7 @@
   }
   
   .sale-summary .btn-payment:hover {
-    background: darkblue;
+    background-color: #333;
   }
   .qtd-input{
     width: 50px;

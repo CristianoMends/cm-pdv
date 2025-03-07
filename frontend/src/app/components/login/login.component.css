@@ -11,11 +11,12 @@
   /* Cartão de login com sombra, bordas arredondadas e espaçamento */
   .login-card {
     background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
+    padding: 0 2rem;
+    border-radius: 0 10px 10px 0;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    height: 50vh;
     text-align: center;
   }
   
@@ -86,4 +87,13 @@
     text-decoration: underline;
     padding: 0;
   }
-  
+  .login-image {
+    height: 50vh;
+    max-width: 500px;
+    border-radius: 10px 0px 0px 10px;
+    overflow: hidden;
+  }
+
+  .login-image img {
+    height: 100%;
+  }
