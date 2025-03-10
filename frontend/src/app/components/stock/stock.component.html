@@ -57,7 +57,6 @@
         <th>Produto</th>
         <th>Preço</th>
         <th>Custo</th>
-        <th>Lucro estimado</th>
         <th>Unidade</th>
         <th>Quantidade Inicial</th>
         <th>Entradas</th>
@@ -74,9 +73,8 @@
           <img [src]="stock.product.image" alt="Imagem do produto" height="50px">
           {{ stock.product.name }}
         </td>
-        <td>{{ stock.product.price | currency : 'BRL'}}</td>
-        <td>{{ stock.product.cost | currency : 'BRL' }}</td>
-        <td>{{ stock.product.price - stock.product.cost | currency : 'BRL' }}</td>
+        <td>R$ {{ stock.product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+        <td>R$ {{ stock.product.cost.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
         <td>{{ stock.product.unit }}</td>
         <td>{{ stock.initialQuantity }}</td>
         <td>{{ stock.totalEntries }}</td>

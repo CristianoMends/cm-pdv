@@ -8,6 +8,7 @@ import { MessageComponent } from "../../shared/message/message.component";
 import { LoadingSpinnerComponent } from "../../shared/loading-spinner/loading-spinner.component";
 import { NgIf } from '@angular/common';
 import { View } from 'electron';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-products',
@@ -19,13 +20,14 @@ import { View } from 'electron';
 })
 export class ProductsComponent {
 
-  constructor(private stockService: StockService) { }
-
-  isLoading = false;
-  stockList: Stock[] = [];
-  @ViewChild('messageComp') messageComp!: MessageComponent;
-
-  ngOnInit(): void {
+  constructor(private stockService: StockService,private titleService: Title) {}
+  
+    isLoading = false;
+    stockList: Stock[] = [];
+    @ViewChild('messageComp') messageComp!: MessageComponent;
+    
+    ngOnInit(): void {
+    this.titleService.setTitle( 'CMPDV - Produtos' );
     this.isLoading = true;
     this.stockService.getStock().subscribe({
       next: (stockList: Stock[]) => {
