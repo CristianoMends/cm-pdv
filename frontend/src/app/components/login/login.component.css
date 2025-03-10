@@ -1,99 +1,131 @@
 /* Container de fundo com gradiente e centralização */
 .login-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #4e54c8, #8f94fb);
-    padding: 1rem;
-  }
-  
-  /* Cartão de login com sombra, bordas arredondadas e espaçamento */
-  .login-card {
-    background: #fff;
-    padding: 0 2rem;
-    border-radius: 0 10px 10px 0;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    height: 50vh;
-    text-align: center;
-  }
-  
-  /* Título do cartão */
-  .login-card h2 {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    color: #333;
-  }
-  
-  /* Grupo de inputs */
-  .input-group {
-    margin-bottom: 1rem;
-    text-align: left;
-  }
-  
-  .input-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #555;
-    font-size: 0.9rem;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-  
-  .input-group input:focus {
-    border-color: #4e54c8;
-  }
-  
-  /* Botão de login */
-  .btn-login {
-    width: 100%;
-    padding: 0.75rem;
-    background: #4e54c8;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .btn-login:hover {
-    background: #3d44a5;
-  }
-  
-  /* Área de cadastro */
-  .signup-option {
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
-  .btn-signup {
-    background: none;
-    border: none;
-    color: #4e54c8;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: underline;
-    padding: 0;
-  }
-  .login-image {
-    height: 50vh;
-    max-width: 500px;
-    border-radius: 10px 0px 0px 10px;
-    overflow: hidden;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4e54c8c5, #8f94fb);
+  padding: 1rem;
+  flex-wrap: wrap;
+}
 
-  .login-image img {
-    height: 100%;
-  }
+
+/* Cartão de login/registro */
+.login-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  overflow-y: auto;
+  height: max-content;
+}
+
+.register-mode{
+  max-width: 800px;
+  height: max-content;
+}
+.register-form{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10%;
+}
+.register-form .input-group{
+  width: 45%;
+
+}
+/* Título */
+.login-card h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Grupo de inputs */
+.input-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+  width: -webkit-fill-available;
+}
+
+.input-group input:focus {
+  border-color: #4e54c8;
+}
+
+/* Mensagens de erro */
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* Botões */
+.btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-login {
+  background: #4e54c8;
+  color: #fff;
+}
+
+.btn-login:hover {
+  background: #3d44a5;
+}
+
+.btn-register {
+  background: #8f94fb;
+  color: #fff;
+}
+
+.btn-register:hover {
+  background: #7a81e8;
+}
+
+.btn-signup {
+  background: none;
+  border: none;
+  color: #4e54c8;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* Área de cadastro */
+.signup-option {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  
+}

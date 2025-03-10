@@ -1,4 +1,14 @@
 <section class="header">
-    <div class="logo">CM PDV <div class="v"></div></div>
-    <div class="adm"></div>
+  <div class="logo">
+      CM PDV <div class="v"></div>
+  </div>
+  <div class="user-info">
+      <div class="user-dropdown" (click)="toggleDropdown()">
+          <span class="username">{{ currentUser?.email }}</span>
+          <div class="dropdown-arrow">&#9662;</div> <!-- Ícone de seta para indicar que é um dropdown -->
+      </div>
+      <div *ngIf="isDropdownOpen" class="dropdown-menu open">
+          <button (click)="logout()">Deslogar</button>
+      </div>
+  </div>
 </section>

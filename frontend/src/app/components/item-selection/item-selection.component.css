@@ -30,7 +30,7 @@
     
     &:hover{
       transition: scale 0.1s linear;
-      scale: 1.1;
+      scale: 1.02;
       z-index: 20;
       box-shadow: 1px 1px 10px 1px #00000025;
     }
@@ -39,7 +39,7 @@
   .item img {
     width: 100%;
     object-fit: cover;
-    mix-blend-mode: normal;
+    mix-blend-mode: multiply;
   }
   
   .selecionado {

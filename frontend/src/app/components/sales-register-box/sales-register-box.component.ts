@@ -101,6 +101,7 @@ export class SalesRegisterBoxComponent implements OnInit, AfterViewInit {
     } else {
 
       const productItem: ProductItem = {
+        id: null,
         product: event.item,
         quantity: event.quantity,
         unitPrice: event.unitPrice
