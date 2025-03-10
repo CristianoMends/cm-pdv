@@ -15,6 +15,8 @@ public interface UserService {
 
     UserDetails getUserByEmail(String email);
 
+    User findByEmail(String email);
+
     void deactivateUser(String email);
 
     Token authenticateUser(LoginDto loginDto);

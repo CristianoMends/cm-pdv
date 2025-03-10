@@ -35,7 +35,7 @@ public class TokenServiceImpl implements TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secretKey);
             return JWT.create()
-                    .withIssuer("pix-api") // Nome do criador
+                    .withIssuer("pdv-api") // Nome do criador
                     .withSubject(user.getEmail()) // Usuário que está recebendo
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
@@ -56,7 +56,7 @@ public class TokenServiceImpl implements TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secretKey);
             return JWT.require(algorithm)
-                    .withIssuer("pix-api")
+                    .withIssuer("pdv-api")
                     .build()
                     .verify(token)
                     .getSubject();

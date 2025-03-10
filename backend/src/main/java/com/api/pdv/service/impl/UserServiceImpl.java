@@ -81,6 +81,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElseThrow(()-> new BusinessException("user not found",HttpStatus.NOT_FOUND));
+    }
+
+    @Override
     public void deactivateUser(String email) {
         var user = (User) this.getUserByEmail(email);
 
@@ -151,4 +156,5 @@ public class UserServiceImpl implements UserService {
 
         return this.userRepository.findByEmail(email).orElse(null);
     }
+
 }

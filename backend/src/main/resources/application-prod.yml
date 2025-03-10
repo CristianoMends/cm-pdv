@@ -1,7 +1,7 @@
 #o perfil prod está configurado para usar banco no docker
 spring:
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/sysagua_db}  # Variável de ambiente para o URL do banco de dados, com valor default
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/cm_pdv_db}  # Variável de ambiente para o URL do banco de dados, com valor default
     username: ${DB_USERNAME:postgres}                       # Variável de ambiente para o nome de usuário do banco, com valor default
     password: ${DB_PASSWORD:qwe123}                         # Variável de ambiente para a senha do banco, com valor default
     driver-class-name: org.postgresql.Driver

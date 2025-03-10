@@ -12,7 +12,10 @@ import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -86,8 +89,19 @@ public class UserController implements UserDoc {
 
     @CrossOrigin
     @GetMapping("/logged")
-    public ResponseEntity<ViewUserDto> getLogged(){
-        return ResponseEntity.ok(Optional.of(this.userService.getLoggedUser()).map(User::toView).get());
+    public ResponseEntity<ViewUserDto> getLogged() {
+        var u = this.userService.getLoggedUser();
+
+        if (u != null){
+            System.out.println(u.getEmail());
+
+            var user = this.userService.findByEmail(u.getEmail());
+
+            return ResponseEntity.ok(user.toView());
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+
 
 }
