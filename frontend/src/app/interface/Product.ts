@@ -1,3 +1,5 @@
+import { ProductCategory } from "./ProductCategory";
+
 export default interface Product {
     /**
      * Identificador único do produto
@@ -64,11 +66,6 @@ export default interface Product {
     active: boolean;
 
     /**
-     * Linha do produto
-     */
-    line: ProductLine;
-
-    /**
      * A Nomenclatura Comum do Mercosul (NCM)
      * Exemplo: "2201.10.00"
      */
@@ -80,13 +77,4 @@ export default interface Product {
     image: string;
 }
 
-// Tipos auxiliares
-interface ProductCategory {
-    id: number;
-    name: string;
-}
 
-interface ProductLine {
-    id: number;
-    name: string;
-}

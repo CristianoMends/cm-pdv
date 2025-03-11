@@ -40,6 +40,6 @@
 
 .selected {
     background: #000000;
-    filter: invert(0.9);        
+    filter: invert(1);        
 }
 

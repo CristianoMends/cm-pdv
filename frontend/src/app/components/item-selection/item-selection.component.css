@@ -27,6 +27,7 @@
     width: 200px;
     border-radius: 5px;
     background-color: white;
+    height: 250px;
     
     &:hover{
       transition: scale 0.1s linear;

@@ -1,8 +1,7 @@
 import Product from './Product';
 
 export default interface Stock {
-  id: number;
-  initialQuantity: number;
+  id: number | null;
   totalEntries: number;
   totalWithdrawals: number;
   currentQuantity: number;

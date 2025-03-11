@@ -11,7 +11,9 @@ import { NgIf } from '@angular/common';
 export class MessageComponent {
   @Input() title: string = '';
   @Input() message: string = '';
+  @Input() messageType: string = 'info';
   @Output() okClicked = new EventEmitter<void>();
+  
 
   @ViewChild('container') container!: ElementRef;
 

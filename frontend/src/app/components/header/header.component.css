@@ -11,7 +11,7 @@
 }
 
 .logo{
-    width: 200px;
+    width: max-content;
     height: 100%;
     margin: 0 25px;
     display: flex;
@@ -23,18 +23,12 @@
     text-shadow: 2px 3px 3px rgb(5, 5, 5);
     gap: 5px;
 }
-.v{
-    font-size: 20px;
-}
-.adm{
-    width: 150px;
-    height: 100%;
-}
 .user-info {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px; /* Espaçamento entre elementos da área do usuário */
+  gap: 10px;
+  margin-right: 10px;
 }
 
 .user-dropdown {
@@ -70,14 +64,13 @@
 
 .dropdown-menu {
   position: absolute;
-  top: 45px; /* Distância do dropdown em relação ao nome do usuário */
-  right: 0;
-  background-color: #ffffff;
+  top: 30px; /* Distância do dropdown em relação ao nome do usuário */
+  left: 0;
+  background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 150px;
-  padding: 10px;
+  width: 100%;
   z-index: 100;
   opacity: 0;
   visibility: hidden;
@@ -92,7 +85,7 @@
 .dropdown-menu button {
   width: 100%;
   padding: 8px;
-  background: #f8f9fa;
+  background: white;
   border: none;
   border-radius: 4px;
   text-align: left;
@@ -101,6 +94,6 @@
 }
 
 .dropdown-menu button:hover {
-  background-color: #007bff;
+  background-color: #1c2838;
   color: white;
 }

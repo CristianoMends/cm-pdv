@@ -1,6 +1,9 @@
 .stock-container {
   padding: 20px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 h2 {
@@ -13,7 +16,7 @@ h2 {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  background-color: #f9f9f9;
+  background-color: white;
 }
 
 .stock-table th,
@@ -32,7 +35,6 @@ h2 {
   margin-right: 10px;
   border-radius: 4px;
   mix-blend-mode: multiply;
-
 }
 
 .stock-table td {
@@ -43,101 +45,134 @@ h2 {
   background-color: #f1f1f1;
 }
 
-
 /*estilo do form*/
-.add-product-form {
+.add-product-form,
+.add-stock-form {
   margin-bottom: 30px;
   padding: 20px;
-  background-color: #f4f4f4;
-  border-radius: 8px;
+  background-color: white;
+  border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.add-product-form form {
   display: flex;
-  gap: 50px;
-  flex-wrap: wrap;
-
+  align-items: start;
+  flex-direction: column;
+  width: 45%;
+  margin: 1%;
 }
 
-.add-product-form h3 {
+.stock-list {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border-radius: 10px;
+  width: 100%;
+  margin: 1.4%;
+}
+
+.stock-list h2 {
+  padding: 10px 20px;
+}
+
+.add-product-form form,
+.add-stock-form form {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.add-product-form h3,
+.add-stock-form h3 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.add-product-form .form-group {
+.add-product-form .form-group,
+.add-stock-form .form-group {
   margin-bottom: 15px;
-  width: 250px;
+  width: 45%;
   height: max-content;
 }
 
-.add-product-form label {
+.add-product-form label,
+.add-stock-form label {
   display: block;
   font-weight: bold;
 }
 
-.add-product-form button[type="submit"] {
+.add-product-form button[type="submit"],
+.add-stock-form button[type="submit"] {
   margin: 0 40%;
   height: max-content;
 }
 
-.add-product-form button:hover {
+.add-product-form button:hover,
+.add-stock-form button:hover {
   background-color: #333;
 }
 
-.add-product-form input[type="file"] {
+.add-product-form input[type="file"],
+.add-stock-form input[type="file"] {
   cursor: pointer;
-  width: max-content;
+  font-size: small;
 }
-.add-product-form .form-group:nth-child(1){
-  width: 300px;
+.add-stock-form{
+  height: max-content;
 }
 
-.add-product-form input[type="file"]::-webkit-file-upload-button {
+.add-product-form .number, .add-stock-form .number {
+  width: 20%;
+}
+
+.add-product-form input[type="file"]::-webkit-file-upload-button,
+.add-stock-form input[type="file"]::-webkit-file-upload-button {
   border: none;
   background-color: transparent;
   cursor: pointer;
-
 }
 
-.add-product-form input[type="file"]:hover {
+.add-product-form input[type="file"]:hover,
+.add-stock-form input[type="file"]:hover {
   background-color: #333;
   color: #ddd;
-
-  &::-webkit-file-upload-button{
-    color: #ddd;
-  }
 }
 
+.add-product-form input[type="file"]:hover::-webkit-file-upload-button,
+.add-stock-form input[type="file"]:hover::-webkit-file-upload-button {
+  color: #ddd;
+}
 
 .new-category-container {
   margin-top: 10px;
   width: 100%;
   animation: fadeIn 0.5s;
-  transform: translateX(5px);
+}
+.new-category-container input{
+  width: -webkit-fill-available;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
 }
 
-input, select, button{
+input, select, button {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid #ddd;
   width: 100%;
 }
 
-button{
+button {
   color: #ddd;
   background-color: #194267;
-  &:hover{
-    cursor: pointer;
-  }
+}
+
+button:hover {
+  cursor: pointer;
 }

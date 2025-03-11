@@ -22,4 +22,8 @@ export class StockService {
     let httpParams = new HttpParams();
     return this.http.get<Stock[]>(this.apiUrl, { params: httpParams });
   }
+
+  addProductToStock(product: any): Observable<any> {
+    return this.http.post(this.apiUrl, product);
+  }
 }

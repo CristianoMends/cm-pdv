@@ -7,9 +7,15 @@
                 <app-loading-spinner></app-loading-spinner>
             </div>
             <ng-template #content>
-                <app-stock [stockList]="stockList"></app-stock>
-                <app-message #messageComp title="Erro ao carregar dados!"
-                    message="Ocorreu um problema ao buscar as informações. Por favor, verifique sua conexão com a internet e tente novamente. Se o erro persistir, entre em contato com o suporte."></app-message>
+                <app-stock #stockComp 
+                [productList]="productList" 
+                [stockList]="stockList"
+                [categories]="categories"
+                (addProductToStock)="addProduct($event)" 
+                (addNewProduct)="addNewProduct($event)"
+                (addNewCategory)="addNewCategory($event)"
+                ></app-stock>
+                <app-message #messageComp title="Erro ao carregar dados!"></app-message>
             </ng-template>
         </div>
     </div>
