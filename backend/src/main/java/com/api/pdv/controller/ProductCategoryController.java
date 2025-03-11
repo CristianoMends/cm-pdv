@@ -19,6 +19,7 @@ public class ProductCategoryController implements ProductCategoryDoc {
     private ProductCategoryService productCategoryService;
 
     @GetMapping
+    @CrossOrigin
     public ResponseEntity<List<ProductCategory>> list(
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) String name,
@@ -29,6 +30,7 @@ public class ProductCategoryController implements ProductCategoryDoc {
     }
 
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<Void> create(@RequestBody CreateCategoryDto dto){
         this.productCategoryService.create(dto.getName());
         return ResponseEntity.status(HttpStatus.CREATED).build();

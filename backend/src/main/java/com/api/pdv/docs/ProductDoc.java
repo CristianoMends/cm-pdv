@@ -10,7 +10,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,7 +33,7 @@ public interface ProductDoc {
             @ApiResponse(responseCode = "403", description = "Não autorizado.", content = @Content()),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor.", content = @Content())
     })
-    ResponseEntity<Void> create(CreateProductDto productDto);
+    ResponseEntity<Void> create(String productDtoJson, MultipartFile image) throws IOException;
 
     @Operation(
             summary = "Buscar todos os produtos",
@@ -60,7 +62,6 @@ public interface ProductDoc {
             LocalDateTime startRegisterDate,
             LocalDateTime endRegisterDate,
             Boolean active,
-            String line,
             String ncm
     );
 

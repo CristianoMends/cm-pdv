@@ -7,13 +7,10 @@ CREATE TABLE products (
     brand VARCHAR(255),
     category_id BIGINT,
     ncm varchar,
-    line_id BIGINT,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     active boolean,
     image varchar,
     PRIMARY KEY (product_id),
-    FOREIGN KEY (category_id) REFERENCES product_category (id),
-    FOREIGN KEY (line_id) REFERENCES product_line (id)
-
+    FOREIGN KEY (category_id) REFERENCES product_category (id)
 );

@@ -1,8 +1,14 @@
-INSERT INTO product_category (name,active)
+INSERT INTO product_category (name, active)
 VALUES
-    ('Água Mineral', true),
-    ('Água de Coco', true),
-    ('Água com Gás', true),
-    ('Água Purificada', true),
-    ('Água Saborizada', true),
-    ('Água Destilada', true);
+    ('Camisetas Geek', true),
+    ('Bonecos de Ação', true),
+    ('Acessórios Geek', true),
+    ('Colecionáveis', true),
+    ('Itens de Decoração Geek', true),
+    ('Mochilas e Bolsas Geek', true),
+    ('Livros e Quadrinhos', true),
+    ('Jogos de Tabuleiro', true),
+    ('Tecnologia Geek', true),
+    ('Produtos Star Wars', true),
+    ('Produtos Marvel', true),
+    ('Produtos DC Comics', true);

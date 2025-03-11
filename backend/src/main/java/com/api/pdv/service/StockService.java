@@ -17,8 +17,6 @@ public interface StockService {
     void processStockReturn(Long productId, int quantity, String reason);
 
     List<Stock> getStock(Long id,
-                         Integer initialQuantityStart,
-                         Integer initialQuantityEnd,
                          Integer totalEntriesStart,
                          Integer totalEntriesEnd,
                          Integer totalWithdrawalsStart,

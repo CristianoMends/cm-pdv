@@ -37,11 +37,6 @@ public class Product {
     @JoinColumn(name = "category_id")
     private ProductCategory category;
 
-
-    @ManyToOne
-    @JoinColumn(name = "line_id")
-    private ProductLine line;
-
     private String ncm;
 
     private LocalDateTime createdAt;
@@ -72,7 +67,6 @@ public class Product {
                 this.createdAt,
                 this.updatedAt,
                 this.active,
-                this.line,
                 this.ncm,
                 this.image
         );

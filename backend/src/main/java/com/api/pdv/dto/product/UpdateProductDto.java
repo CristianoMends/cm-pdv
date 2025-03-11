@@ -35,9 +35,6 @@ public class UpdateProductDto {
     @Schema(description = "id unico da categoria do produto", example = "1")
     private Long categoryId;
 
-    @Schema(description = "id unico da linha do produto", example = "1")
-    private Long lineId;
-
     @Schema(description = "A Nomenclatura Comum do Mercosul (NCM)", example = "2201.10.00")
     private String ncm;
 }

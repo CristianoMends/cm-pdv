@@ -1,6 +1,7 @@
 package com.api.pdv.controller;
 
 import com.api.pdv.docs.FileDoc;
+import com.api.pdv.dto.file.FileDto;
 import com.api.pdv.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,11 +20,14 @@ public class FileUploadController implements FileDoc {
     private FileService fileService;
 
     @PostMapping(path = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        return ResponseEntity.ok(fileService.uploadFile(file));
+    @CrossOrigin
+    public ResponseEntity<FileDto> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        FileDto fileDto = new FileDto(fileService.uploadFile(file));
+        return ResponseEntity.ok(fileDto);
     }
 
     @GetMapping("/download/{fileName}")
+    @CrossOrigin
     public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName) throws IOException {
 
         byte[] fileContent = fileService.downloadFile(fileName);

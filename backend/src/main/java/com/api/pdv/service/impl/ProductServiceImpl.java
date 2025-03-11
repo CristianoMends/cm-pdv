@@ -5,7 +5,6 @@ import com.api.pdv.dto.product.UpdateProductDto;
 import com.api.pdv.exception.BusinessException;
 import com.api.pdv.model.Product;
 import com.api.pdv.repository.ProductCategoryRepository;
-import com.api.pdv.repository.ProductLineRepository;
 import com.api.pdv.repository.ProductRepository;
 import com.api.pdv.repository.StockRepository;
 import com.api.pdv.service.ProductService;
@@ -30,24 +29,17 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
 
-    @Autowired
-    private ProductLineRepository productLineRepository;
-
     @Override
-    public void registerProduct(CreateProductDto dto) {
-
-        var line = this.productLineRepository.findById(dto.getLineId()).orElseThrow(
-                () -> new BusinessException("Product Line not found", HttpStatus.NOT_FOUND)
-        );
+    public void registerProduct(CreateProductDto dto, String url) {
 
         var cat = this.productCategoryRepository.findById(dto.getCategoryId()).orElseThrow(
                 () -> new BusinessException("Product category not found", HttpStatus.NOT_FOUND)
         );
 
         if (cat.getActive().equals(false)) throw new BusinessException("Category is inactive");
-        if (line.getActive().equals(false)) throw new BusinessException("Line is inactive");
 
         var product = new Product();
+        product.setImage(url);
         product.setPrice(dto.getPrice());
         product.setCost(dto.getCost());
         product.setActive(true);
@@ -56,7 +48,6 @@ public class ProductServiceImpl implements ProductService {
         product.setNcm(dto.getNcm());
         product.setUnit(dto.getUnit());
         product.setCategory(cat);
-        product.setLine(line);
         product.setCreatedAt(LocalDateTime.now(ZoneOffset.of("-03:00")));
         this.productRepository.save(product);
     }
@@ -76,13 +67,11 @@ public class ProductServiceImpl implements ProductService {
                                      LocalDateTime startRegisterDate,
                                      LocalDateTime endRegisterDate,
                                      Boolean active,
-                                     String line,
                                      String ncm) {
         if (name == null) name = "";
         if (category == null) category = "";
         if (unit == null) unit = "";
         if (brand == null) brand = "";
-        if (line == null) line = "";
         if (ncm == null) ncm = "";
 
 
@@ -111,8 +100,7 @@ public class ProductServiceImpl implements ProductService {
                 startUpdateDate,
                 endUpdateDate,
                 active,
-                ncm,
-                line
+                ncm
         );
     }
 
@@ -129,13 +117,6 @@ public class ProductServiceImpl implements ProductService {
             p.setCategory(cat);
         }
 
-        if (dto.getLineId() != null) {
-            var line = this.productLineRepository.findById(dto.getLineId()).orElseThrow(
-                    () -> new BusinessException("Product line not found", HttpStatus.NOT_FOUND)
-            );
-
-            p.setLine(line);
-        }
 
         if (dto.getNcm() != null) p.setNcm(dto.getNcm());
         if (dto.getBrand() != null) p.setBrand(dto.getBrand());

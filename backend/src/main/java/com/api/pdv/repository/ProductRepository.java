@@ -20,7 +20,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                 and   ( (:priceStart is null or :priceEnd is null) or p.price between :priceStart and :priceEnd) 
                 and   ( (:costStart is null or :costEnd is null) or p.cost between :costStart and :costEnd ) 
                 and   ( upper(p.category.name) like upper(concat('%', :category, '%')) )
-                and   ( upper(p.line.name) like upper(concat('%', :line, '%')) )
                 and   ( upper(p.ncm) like upper(concat('%', :ncm, '%'))      )
                 and   ( upper(p.unit) like upper(concat('%', :unit, '%'))    )
                 and   ( upper(p.brand) like upper(concat('%', :brand, '%'))  )                
@@ -42,8 +41,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("createdAtInit") LocalDateTime createdAtInit,
             @Param("createdAtEnd") LocalDateTime createdAtEnd,
             @Param("active") Boolean active,
-            @Param("ncm") String ncm,
-            @Param("line") String line
+            @Param("ncm") String ncm
     );
 
 

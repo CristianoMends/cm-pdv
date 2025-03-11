@@ -85,8 +85,7 @@ public class StockServiceImpl implements StockService, StockSubject {
 
         var newStock = new Stock();
         newStock.setProduct(product);
-        newStock.setInitialQuantity(dto.getQuantity());
-        newStock.setTotalEntries(0);
+        newStock.setTotalEntries(dto.getQuantity());
         newStock.setTotalWithdrawals(0);
         newStock.setCreatedAt(getCurrentTimestamp());
         var saved = this.stockRepository.save(newStock);
@@ -128,8 +127,6 @@ public class StockServiceImpl implements StockService, StockSubject {
 
     @Override
     public List<Stock> getStock(Long id,
-                                Integer initialQuantityStart,
-                                Integer initialQuantityEnd,
                                 Integer totalEntriesStart,
                                 Integer totalEntriesEnd,
                                 Integer totalWithdrawalsStart,
@@ -144,8 +141,6 @@ public class StockServiceImpl implements StockService, StockSubject {
         if (productName == null) productName = "";
         return this.stockRepository.list(
                 id,
-                initialQuantityStart,
-                initialQuantityEnd,
                 totalEntriesStart,
                 totalEntriesEnd,
                 totalWithdrawalsStart,

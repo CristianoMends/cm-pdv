@@ -1,5 +1,6 @@
 package com.api.pdv.docs;
 
+import com.api.pdv.dto.file.FileDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,7 +27,7 @@ public interface FileDoc {
             @ApiResponse(responseCode = "404", description = "Diretório de upload não encontrado.", content = @Content()),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor.", content = @Content())
     })
-    ResponseEntity<String> uploadFile(MultipartFile file) throws IOException;
+    ResponseEntity<FileDto> uploadFile(MultipartFile file) throws IOException;
 
     @Operation(
             summary = "Exibir arquivo de imagem",

@@ -4,13 +4,18 @@ import com.api.pdv.docs.ProductDoc;
 import com.api.pdv.dto.product.CreateProductDto;
 import com.api.pdv.dto.product.UpdateProductDto;
 import com.api.pdv.model.Product;
+import com.api.pdv.service.FileService;
 import com.api.pdv.service.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,13 +26,22 @@ public class ProductController implements ProductDoc {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private FileService fileService;
 
     @CrossOrigin
-    @PostMapping
-    public ResponseEntity<Void> create(@RequestBody @Valid CreateProductDto productDto) {
-        productService.registerProduct(productDto);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> create(@RequestParam("productDto") String productDtoJson,
+                                       @RequestParam("image") MultipartFile image) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        CreateProductDto productDto = objectMapper.readValue(productDtoJson, CreateProductDto.class);
+
+        String url = this.fileService.uploadFile(image);
+        productService.registerProduct(productDto, url);
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
     @GetMapping
     @CrossOrigin
@@ -46,7 +60,6 @@ public class ProductController implements ProductDoc {
             @RequestParam(required = false) LocalDateTime startRegisterDate,
             @RequestParam(required = false) LocalDateTime endRegisterDate,
             @RequestParam(required = false) Boolean active,
-            @RequestParam(required = false) String line,
             @RequestParam(required = false) String ncm
     ) {
         List<Product> products = productService.getProducts(
@@ -64,10 +77,11 @@ public class ProductController implements ProductDoc {
                         startUpdateDate,
                         endUpdateDate,
                         active,
-                        ncm,
-                        line)
+                        ncm
+                        )
                 .stream()
                 .toList();
+
 
         return ResponseEntity.ok().body(products);
     }

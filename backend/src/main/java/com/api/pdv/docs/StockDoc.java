@@ -57,8 +57,6 @@ public interface StockDoc {
     @GetMapping
     ResponseEntity<List<Stock>> list(
             Long id,
-            Integer initialQuantityStart,
-            Integer initialQuantityEnd,
             Integer totalEntriesStart,
             Integer totalEntriesEnd,
             Integer totalWithdrawalsStart,

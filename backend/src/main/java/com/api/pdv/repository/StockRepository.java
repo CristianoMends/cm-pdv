@@ -13,7 +13,6 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
     @Query("""
             select s from Stock s
             where (:id is null or s.id = :id) 
-            and ((:initialQuantityStart is null or :initialQuantityEnd is null) or s.initialQuantity between :initialQuantityStart and :initialQuantityEnd) 
             and ((:totalEntriesStart is null or :totalEntriesEnd is null) or s.totalEntries between :totalEntriesStart and :totalEntriesEnd) 
             and ((:totalWithdrawalsStart is null or :totalWithdrawalsEnd is null) or s.totalWithdrawals between :totalWithdrawalsStart and :totalWithdrawalsEnd) 
             and ((CAST(:createdAtStart AS timestamp) is null or CAST(:createdAtEnd AS timestamp) is null) or s.createdAt between :createdAtStart and :createdAtEnd )
@@ -23,8 +22,6 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
             order by s.createdAt""")
     List<Stock> list(
             @Param("id") Long id,
-            @Param("initialQuantityStart") Integer initialQuantityStart,
-            @Param("initialQuantityEnd") Integer initialQuantityEnd,
             @Param("totalEntriesStart") Integer totalEntriesStart,
             @Param("totalEntriesEnd") Integer totalEntriesEnd,
             @Param("totalWithdrawalsStart") Integer totalWithdrawalsStart,

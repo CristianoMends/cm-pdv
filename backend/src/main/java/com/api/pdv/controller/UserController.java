@@ -93,10 +93,7 @@ public class UserController implements UserDoc {
         var u = this.userService.getLoggedUser();
 
         if (u != null){
-            System.out.println(u.getEmail());
-
             var user = this.userService.findByEmail(u.getEmail());
-
             return ResponseEntity.ok(user.toView());
         }
 

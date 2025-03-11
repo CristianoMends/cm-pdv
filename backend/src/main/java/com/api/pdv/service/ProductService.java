@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    void registerProduct(CreateProductDto productDto);
+    void registerProduct(CreateProductDto productDto, String url);
 
     List<Product> getProducts(Long id,
                               String name,
@@ -26,7 +26,6 @@ public interface ProductService {
                               LocalDateTime startRegisterDate,
                               LocalDateTime endRegisterDate,
                               Boolean active,
-                              String line,
                               String ncm);
 
     void updateProduct(Long id, UpdateProductDto dto);

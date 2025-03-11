@@ -1,7 +1,6 @@
 package com.api.pdv.dto.product;
 
 import com.api.pdv.model.ProductCategory;
-import com.api.pdv.model.ProductLine;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,9 +44,6 @@ public class ViewProductDto {
 
     @Schema(description = "Se o produto não está ativo, então foi deletado", example = "true")
     private Boolean active;
-
-    @Schema(description = "Linha do produto")
-    private ProductLine line;
 
     @Schema(description = "A Nomenclatura Comum do Mercosul (NCM)", example = "2201.10.00")
     private String ncm;

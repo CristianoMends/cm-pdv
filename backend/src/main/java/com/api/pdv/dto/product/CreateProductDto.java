@@ -37,9 +37,6 @@ public class CreateProductDto {
     @Schema(description = "A Nomenclatura Comum do Mercosul (NCM)", example = "2201.10.00")
     private String ncm;
 
-    @Schema(description = "Uma linha de produtos é uma categoria que lhe permite segmentar os seus produtos de acordo com determinadas especificações", example = "1")
-    private Long lineId;
-
     @Schema(description = "Marca do produto", example = "Crystal", maxLength = 30)
     @Size(max = 30, message = "Brand should not exceed 30 characters")
     private String brand;

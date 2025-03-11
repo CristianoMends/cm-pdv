@@ -20,9 +20,6 @@ public class Stock {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "initial_quantity", nullable = false)
-    private int initialQuantity;
-
     @Column(name = "total_entries", nullable = false)
     private int totalEntries;
 
@@ -44,7 +41,7 @@ public class Stock {
 
     @PostLoad
     public void calculateCurrentQuantity() {
-        this.currentQuantity = initialQuantity + totalEntries - totalWithdrawals;
+        this.currentQuantity = totalEntries - totalWithdrawals;
     }
 
 }

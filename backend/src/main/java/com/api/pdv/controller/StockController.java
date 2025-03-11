@@ -32,8 +32,6 @@ public class StockController implements StockDoc {
     @CrossOrigin
     public ResponseEntity<List<Stock>> list(
             @RequestParam(value = "id", required = false) Long id,
-            @RequestParam(value = "initialQuantityStart", required = false) Integer initialQuantityStart,
-            @RequestParam(value = "initialQuantityEnd", required = false) Integer initialQuantityEnd,
             @RequestParam(value = "totalEntriesStart", required = false) Integer totalEntriesStart,
             @RequestParam(value = "totalEntriesEnd", required = false) Integer totalEntriesEnd,
             @RequestParam(value = "totalWithdrawalsStart", required = false) Integer totalWithdrawalsStart,
@@ -48,8 +46,6 @@ public class StockController implements StockDoc {
 
         List<Stock> stockList = this.service.getStock(
                 id,
-                initialQuantityStart,
-                initialQuantityEnd,
                 totalEntriesStart,
                 totalEntriesEnd,
                 totalWithdrawalsStart,
