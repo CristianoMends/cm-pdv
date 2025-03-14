@@ -46,7 +46,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  z-index: 1000;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  height: max-content;
+  width: max-content;
+  z-index: 100;
 }

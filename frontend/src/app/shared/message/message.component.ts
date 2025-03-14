@@ -9,17 +9,32 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent {
-  @Input() title: string = '';
-  @Input() message: string = '';
-  @Input() messageType: string = 'info';
+  @Input() private _message: string = '';
+  @Input() private _messageType: string = 'info';
+  @Input() private _buttonLabel = 'OK';
   @Output() okClicked = new EventEmitter<void>();
-  
+  containerVisible = false;
 
-  @ViewChild('container') container!: ElementRef;
+  get message(): string { return this._message; }
+  get messageType(): string { return this._messageType; }
+  get buttonLabel(): string { return this._buttonLabel; }
 
-  containerVisible = false; 
+  show(): void;
+  show(message: string): void;
+  show(message: string, messageType: string): void;
+  show(message: string, messageType: string, buttonLabel:string): void;
 
-  show(): void {
+  show(message?: string, messageType?: string, buttonLabel?:string): void {
+
+    if (message !== undefined) {
+      this._message = message;
+    }
+    if (messageType !== undefined) {
+      this._messageType = messageType;
+    }
+    if (buttonLabel !== undefined) {
+      this._buttonLabel = buttonLabel;
+    }
     this.containerVisible = true;
   }
 

@@ -1,9 +1,9 @@
-<div class="orders-dashboard">
-  <h1>Dashboard de Vendas</h1>
+<div *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
 
-  <div *ngIf="isLoading" class="loading-container">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
+<div *ngIf="!isLoading" class="orders-dashboard">
+  <h1>Dashboard de Vendas</h1>
 
   <div class="container" *ngIf="!isLoading">
     <!-- Filtro de Mês -->
@@ -22,7 +22,7 @@
         <h3>Total em Vendas</h3>
         <p>R$ {{ totalSales.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
       </div>
-      
+
       <div class="card">
         <h3>Compras Canceladas</h3>
         <p>{{ canceledOrders }}</p>
@@ -46,3 +46,6 @@
     </div>
   </div>
 </div>
+
+<app-message #messageComp title="Erro ao carregar dados!"
+  message="Ocorreu um problema ao buscar as informações. Por favor, verifique sua conexão com a internet e tente novamente. Se o erro persistir, entre em contato com o suporte."></app-message>

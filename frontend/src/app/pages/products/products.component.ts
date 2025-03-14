@@ -7,16 +7,14 @@ import Stock from '../../interface/Stock';
 import { MessageComponent } from "../../shared/message/message.component";
 import { LoadingSpinnerComponent } from "../../shared/loading-spinner/loading-spinner.component";
 import { NgIf } from '@angular/common';
-import { Title } from '@angular/platform-browser';
 import { ProductService } from '../../service/product.service';
 import Product from '../../interface/Product';
 import ProductCategory from '../../interface/Product';
-import { FileService } from '../../service/file.service';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  providers: [StockService, ProductService, FileService],
+  providers: [StockService, ProductService],
   imports: [HeaderComponent, SideMenuComponent, StockComponent, MessageComponent, LoadingSpinnerComponent, NgIf],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
@@ -25,9 +23,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private stockService: StockService,
-    private titleService: Title,
     private productService: ProductService,
-    private fileService: FileService
   ) { }
 
   isLoading = false;
@@ -40,8 +36,6 @@ export class ProductsComponent implements OnInit {
   @ViewChild('messageComp') messageComp!: MessageComponent;
 
   ngOnInit(): void {
-    this.titleService.setTitle('CMPDV - Produtos');
-
     if (this.isDateLoaded) { return; }
     this.loadStock();
     this.loadProducts();
@@ -60,9 +54,7 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false;
         setTimeout(() => {
           if (this.messageComp) {
-            this.messageComp.message = 'Erro ao carregar os dados dos produtos. Por favor, tente novamente mais tarde.';
-            this.messageComp.messageType = 'error';
-            this.messageComp.show();
+            this.messageComp.show('erro ao carregar os dados dos produtos. Por favor, tente novamente mais tarde.', 'error');
           }
         });
       }
@@ -80,9 +72,7 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false;
         setTimeout(() => {
           if (this.messageComp) {
-            this.messageComp.message = 'Erro ao carregar os dados dos produtos. Por favor, tente novamente mais tarde.';
-            this.messageComp.messageType = 'error';
-            this.messageComp.show();
+            this.messageComp.show('erro ao carregar os dados dos produtos. Por favor, tente novamente mais tarde.', 'error');
           }
         });
       }
@@ -100,29 +90,7 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false;
         setTimeout(() => {
           if (this.messageComp) {
-            this.messageComp.message = 'Erro ao carregar os dados dos produtos. Por favor, tente novamente mais tarde.';
-            this.messageComp.messageType = 'error';
-            this.messageComp.show();
-          }
-        });
-      }
-    });
-  }
-
-  uploadFile($event: any) {
-    this.isLoading = true;
-    this.fileService.upload($event).subscribe({
-      next: (response: { url: string }) => {
-        this.stockComp.newProductImageUrl = response.url;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.isLoading = false;
-        setTimeout(() => {
-          if (this.messageComp) {
-            this.messageComp.message = 'Erro ao fazer upload da imagem. Verifique sua conexão e tente novamente.';
-            this.messageComp.messageType = 'error';
-            this.messageComp.show();
+            this.messageComp.show('erro ao carregar os dados dos produtos. Por favor, tente novamente mais tarde.', 'error');
           }
         });
       }
@@ -135,13 +103,11 @@ export class ProductsComponent implements OnInit {
         this.loadStock();
         setTimeout(() => {
           if (this.messageComp) {
-            
+
             this.loadStock();
             this.stockList = [...this.stockList];
 
-            this.messageComp.message = 'Produto adicionado ao estoque com sucesso!';
-            this.messageComp.messageType = 'success';
-            this.messageComp.show();
+            this.messageComp.show('Produto adicionado ao estoque com sucesso!', 'success');
           }
         });
       },
@@ -149,9 +115,7 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false;
         setTimeout(() => {
           if (this.messageComp) {
-            this.messageComp.message = 'Erro ao adicionar o produto ao estoque.';
-            this.messageComp.messageType = 'error';
-            this.messageComp.show();
+            this.messageComp.show('Erro ao adicionar o produto ao estoque.', 'error');
           }
         });
       }
@@ -164,9 +128,7 @@ export class ProductsComponent implements OnInit {
         this.loadProducts();
         setTimeout(() => {
           if (this.messageComp) {
-            this.messageComp.message = 'Categoria adicionada com sucesso!';
-            this.messageComp.messageType = 'success';
-            this.messageComp.show();
+            this.messageComp.show('Categoria adicionada com sucesso!', 'success');
           }
         });
       },
@@ -174,9 +136,7 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false;
         setTimeout(() => {
           if (this.messageComp) {
-            this.messageComp.message = 'Erro ao adicionar a categoria.';
-            this.messageComp.messageType = 'error';
-            this.messageComp.show();
+            this.messageComp.show('Erro ao adicionar a categoria.', 'error');
           }
         });
       }
@@ -189,9 +149,7 @@ export class ProductsComponent implements OnInit {
         this.loadProducts();
         setTimeout(() => {
           if (this.messageComp) {
-            this.messageComp.message = 'Produto cadastrado com sucesso!';
-            this.messageComp.messageType = 'success';
-            this.messageComp.show();
+            this.messageComp.show('Produto cadastrado com sucesso!', 'success');
           }
         });
       },
@@ -199,9 +157,7 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false;
         setTimeout(() => {
           if (this.messageComp) {
-            this.messageComp.message = 'Erro ao cadastrar o produto. Verifique os dados e tente novamente.';
-            this.messageComp.messageType = 'error';
-            this.messageComp.show();
+            this.messageComp.show('Erro ao cadastrar o produto. Verifique os dados e tente novamente.', 'error');
           }
         });
       }

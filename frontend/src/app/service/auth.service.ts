@@ -1,7 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../environment';
 import Login from '../interface/login';
 import { User } from '../interface/User';
@@ -9,40 +9,65 @@ import { isPlatformBrowser } from '@angular/common'; // Importe isPlatformBrowse
 import Token from '../interface/Token';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class AuthService {
   private API_URL = environment.apiUrl + 'users';
   private TOKEN_KEY = 'authToken';
 
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   // Método de login que chama a API
-  login(login: Login): Observable<Token> {
+  login(login: Login, remember: boolean): Observable<Token> {
     return this.http.post<any>(`${this.API_URL}/login`, login).pipe(
       tap(response => {
-        this.setToken(response.token)       
+        if (remember) {
+          this.setTokenOnLocalStorage(response.token);
+        } else {
+          this.setTokenOnSessionStorage(response.token);
+        }
       })
     );
   }
 
+  saveUser() {
+
+  }
+
+  async hasTokenValid(): Promise<boolean> {
+    if (!this.getToken()) { return false; }
+
+    return new Promise((resolve) => {
+      this.isValidToken().subscribe({
+        next: () => resolve(true),
+        error: () => resolve(false)
+      });
+    });
+  }
+
   getLoggedUser(): Observable<User> {
-    const token = this.getToken();    
+    const token = this.getToken();
     const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
-    return this.http.get<User>(`${this.API_URL}/logged`, { headers, responseType: 'json' });
+
+    return this.http.get<User>(`${this.API_URL}/me`, { headers });
   }
 
   // Método para armazenar o token no localStorage
-  setToken(token: string): void {
+  setTokenOnLocalStorage(token: string): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem(this.TOKEN_KEY, token); // Só executa no navegador
+      localStorage.setItem(this.TOKEN_KEY, token);
     }
   }
 
-  // Método para recuperar o token do localStorage
+  setTokenOnSessionStorage(token: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem(this.TOKEN_KEY, token);
+    }
+  }
+
   getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem(this.TOKEN_KEY); // Só executa no navegador
+      return localStorage.getItem(this.TOKEN_KEY) || sessionStorage.getItem(this.TOKEN_KEY);
     }
     return null;
   }
@@ -50,7 +75,8 @@ export class AuthService {
   // Método para remover o token (logout)
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem(this.TOKEN_KEY); // Só executa no navegador
+      localStorage.removeItem(this.TOKEN_KEY);
+      sessionStorage.removeItem(this.TOKEN_KEY);
     }
   }
 
@@ -58,4 +84,14 @@ export class AuthService {
   isAuthenticated(): boolean {
     return this.getToken() !== null;
   }
+
+  isValidToken(): Observable<boolean> {
+    const token = this.getToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+    return this.http.get<User>(`${this.API_URL}/validateToken`, { headers, responseType: 'json' }).pipe(
+      map(() => true),
+      catchError(() => of(false))
+    );
+  }
+
 }

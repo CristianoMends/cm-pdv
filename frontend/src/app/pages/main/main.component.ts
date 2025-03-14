@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
 import { SideMenuComponent } from "../../components/side-menu/side-menu.component";
-import { SalesDashboardComponent } from "../../components/dashboard/sales-dashboard.component";
-import { Title } from '@angular/platform-browser';
+import { SalesDashboardComponent } from "../../components/sales-dashboard/sales-dashboard.component";
 
 @Component({
   selector: 'app-main',
@@ -12,9 +11,5 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-    constructor(private titleService: Title) {}
   
-    ngOnInit(): void {
-      this.titleService.setTitle( 'CMPDV - Painel' );
-    }
 }

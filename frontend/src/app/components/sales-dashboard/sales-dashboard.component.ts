@@ -1,22 +1,23 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { OrderService } from '../../service/order.service';
 import { Order } from '../../interface/Order';
-import { CommonModule, isPlatformBrowser, NgFor, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgIf } from '@angular/common';
 import { EChartsOption } from 'echarts';
 import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { FormsModule } from '@angular/forms';
 import ProductItem from '../../interface/ProductItem';
+import { MessageComponent } from "../../shared/message/message.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgFor, NgIf, NgxEchartsDirective, LoadingSpinnerComponent, FormsModule],
+  imports: [NgIf, NgxEchartsDirective, LoadingSpinnerComponent, FormsModule, MessageComponent],
   providers: [provideEcharts(), OrderService],
   templateUrl: './sales-dashboard.component.html',
   styleUrl: './sales-dashboard.component.css'
 })
-export class SalesDashboardComponent {
+export class SalesDashboardComponent implements OnInit {
   isBrowser: boolean;
   isLoading: boolean = false;
   orders: Order[] = [];
@@ -36,6 +37,8 @@ export class SalesDashboardComponent {
   // Filtro de mês
   selectedMonth: string = '';
 
+  @ViewChild('messageComp') message!: MessageComponent;
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private orderService: OrderService
@@ -50,15 +53,19 @@ export class SalesDashboardComponent {
     }
   }
 
+
   loadOrders(): void {
     this.isLoading = true;
-    this.orderService.getAll().subscribe((orders: Order[]) => {
-      this.orders = orders;
-      this.applyMonthFilter();
-      this.isLoading = false;
-    }, error => {
-      console.error('Erro ao carregar os pedidos', error);
-      this.isLoading = false;
+    this.orderService.getAll().subscribe({
+      next: (orders: Order[]) => {
+        this.orders = orders;
+        this.applyMonthFilter();
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.message.show('Erro ao carregar os dados. Verifique sua conexão e tente novamente.', 'error');
+      }
     });
   }
 
@@ -109,6 +116,7 @@ export class SalesDashboardComponent {
       return acc;
     }, {} as Record<string, number>);
 
+
     this.chartOption = {
       xAxis: { type: 'category', data: Object.keys(salesByDay) },
       yAxis: { type: 'value' },
@@ -127,10 +135,11 @@ export class SalesDashboardComponent {
 
     this.pieChartOption = {
       tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+      legend:{orient:'vertical', left:'left'},
       series: [{
         name: 'Produtos Mais Vendidos',
         type: 'pie',
-        radius: '55%',
+        radius: '50%',
         data: topProducts
       }]
     };
@@ -139,9 +148,9 @@ export class SalesDashboardComponent {
   setupLineChart(): void {
     const dates = this.filteredOrders.map(order => this.formatDate(order.createdAt));
     const totals = this.filteredOrders.map(order => order.totalAmount);
-  
+
     this.lineChartOption = {
-      tooltip: { 
+      tooltip: {
         trigger: 'axis',
         formatter: (params: any) => {
           // Formatando os valores de totalAmount
@@ -159,7 +168,7 @@ export class SalesDashboardComponent {
       }]
     };
   }
-  
+
 
   calculateProductSales(): any[] {
     const productSalesMap: { [key: string]: { name: string, quantity: number } } = {};

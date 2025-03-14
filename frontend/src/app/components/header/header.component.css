@@ -36,45 +36,44 @@
   display: flex;
   align-items: center;
   font-size: 1.1em;
-  padding: 5px 10px; /* Adiciona padding para tornar a área do dropdown mais confortável */
+  padding: 5px 10px; 
   border-radius: 5px;
-  background-color: #2a3a4c; /* Fundo sutil para o botão do usuário */
+  background-color: #2a3a4c; 
   color: white;
-  transition: background-color 0.3s ease; /* Transição suave para o hover */
+  transition: background-color 0.3s ease; 
 }
 
 .user-dropdown:hover {
-  background-color: #1c2838; /* Altera cor ao passar o mouse */
+  background-color: #1c2838; 
 }
 
 .username {
   margin-right: 10px;
-  font-weight: 600; /* Deixa o nome do usuário mais destacado */
+  font-weight: 600; 
   color: #f8f8f8;
 }
 
 .dropdown-arrow {
   font-size: 1.2em;
-  transition: transform 0.3s ease; /* Efeito de rotação suave ao abrir o dropdown */
+  transition: transform 0.3s ease; 
 }
 
 .user-dropdown:hover .dropdown-arrow {
-  transform: rotate(180deg); /* Rotaciona a seta no hover */
+  transform: rotate(180deg); 
 }
 
 .dropdown-menu {
   position: absolute;
-  top: 30px; /* Distância do dropdown em relação ao nome do usuário */
+  top: 30px; 
   left: 0;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
-  z-index: 100;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* Animação de exibição */
+  transition: opacity 0.3s ease, visibility 0.3s ease; 
 }
 
 .dropdown-menu.open {
