@@ -28,7 +28,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             and (:paymentStatus is null or o.paymentStatus = :paymentStatus)
             and ((CAST(:createdAtStart as TIMESTAMP) is null or CAST(:createdAtEnd as TIMESTAMP) is null) or o.createdAt between :createdAtStart and :createdAtEnd) 
             and ((CAST(:finishedAtStart as TIMESTAMP) is null or CAST(:finishedAtEnd as TIMESTAMP) is null) or o.finishedAt between :finishedAtStart and :finishedAtEnd)
-            order by o.id
+            order by o.createdAt
             """)
     List<Order> list(
             @Param("id") Long id,
