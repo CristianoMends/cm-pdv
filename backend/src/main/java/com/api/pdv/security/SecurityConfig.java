@@ -1,5 +1,6 @@
 package com.api.pdv.security;
 
+import com.api.pdv.enumeration.UserAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,14 +26,16 @@ public class SecurityConfig {
             "/v3/api-docs/**",
             "/api-docs/**",
             "/h2/**",
-            "/**"
+            "/users/login"
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers
+
                         .contentSecurityPolicy(csp -> csp.policyDirectives(
                                 "default-src 'self'; " +
                                         "script-src 'self' 'unsafe-inline'; " +
@@ -41,17 +44,12 @@ public class SecurityConfig {
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/users").permitAll()//.hasRole(UserAccess.DEVELOPER.name())//penas devs manipulam usuarios
-
-                        .requestMatchers("/customers/**").permitAll()
-                        .requestMatchers("/products/**").permitAll()
-                        .requestMatchers("/stock/**").permitAll()
-                        .requestMatchers("/purchases/**").permitAll()
-                        .requestMatchers("/suppliers/**").permitAll()
                         .requestMatchers(freeRoutes).permitAll()//rotas liberadas
-                        .anyRequest().authenticated()//libera demais rotas pra usuario autenticados
+                        .anyRequest().permitAll()//.authenticated()
                 )
+
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) //adiciona filtro antes, para checar o token
+
                 .build();
     }
 
