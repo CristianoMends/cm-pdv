@@ -22,21 +22,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("orders")
+@CrossOrigin
 public class OrderController implements OrderDoc {
 
     @Autowired
     private OrderService service;
 
-    @CrossOrigin
     @PostMapping
     public ResponseEntity<Void> create(
             @RequestBody @Valid CreateOrderDto dto) {
         this.service.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
     @GetMapping
-    @CrossOrigin
     public ResponseEntity<List<ViewOrderDto>> list(
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) Long customerId,
