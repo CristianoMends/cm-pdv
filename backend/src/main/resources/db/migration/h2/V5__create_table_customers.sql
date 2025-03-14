@@ -4,7 +4,7 @@ CREATE TABLE customers (
     phone VARCHAR(13) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     active BOOLEAN NOT NULL,
-    cnpj VARCHAR(18) NOT NULL UNIQUE,
+    cnpj VARCHAR(18) UNIQUE,
     number VARCHAR(10),
     neighborhood VARCHAR(50),
     street VARCHAR(255),
