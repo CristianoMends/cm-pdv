@@ -11,31 +11,33 @@ import Stock from '../../interface/Stock';
 import ProductItem from '../../interface/ProductItem';
 import { SaleSummaryComponent } from "../../components/sale-summary/sale-summary.component";
 import { NgIf } from '@angular/common';
+import { PaymentSectionComponent } from "../../components/payment-section/payment-section.component";
+import { OrderService } from '../../service/order.service';
 
 @Component({
   selector: 'app-sale-register',
   standalone: true,
-  providers: [StockService],
-  imports: [NgIf, HeaderComponent, SideMenuComponent, ItemSelectionComponent, MessageComponent, LoadingSpinnerComponent, SaleSummaryComponent],
+  providers: [StockService, OrderService],
+  imports: [NgIf, HeaderComponent, SideMenuComponent, ItemSelectionComponent, MessageComponent, LoadingSpinnerComponent, SaleSummaryComponent, PaymentSectionComponent],
   templateUrl: './sale-register.component.html',
   styleUrl: './sale-register.component.css'
 })
 export class SaleRegisterComponent implements OnInit {
-  constructor(private stockService: StockService) { }
-
-  ngOnInit(): void {
-    this.loadProductsOnStock();
-
-  }
-
-
   @ViewChild('messageComp') message!: MessageComponent;
 
   products: Product[] = [];
   productSales: ProductItem[] = [];
   isLoading: boolean = false;
   selectedItemsMap: Map<Product, number> = new Map<Product, number>();
+  total: number = 0;
+  showPayment = false;
 
+  constructor(private stockService: StockService, private orderService: OrderService) { }
+
+  ngOnInit(): void {
+    this.loadProductsOnStock();
+
+  }
 
   ngAfterViewInit() {
     if (!this.message) {
@@ -106,11 +108,41 @@ export class SaleRegisterComponent implements OnInit {
       this.productSales.splice(index, 1);
       this.selectedItemsMap.delete(removedProduct);
       this.selectedItemsMap = new Map(this.selectedItemsMap);
-      this.showMessage('Produto removido com sucesso!', 'success');
     }
   }
 
-  proceedToPayment() {
+  proceedToPayment($event: any) {
+    this.total = $event
+    this.showPayment = true;
+  }
+  cancelPayment() {
+    this.showPayment = false;
+  }
+  confirmPayment($event: { method: string, change?: number }) {
+    const order = {
+      customerId: 1,
+      productOrders: this.productSales.map(productItem => ({
+        quantity: productItem.quantity,
+        unitPrice: productItem.unitPrice,
+        productId: productItem.product.id
+      })),
+      paidAmount: $event.change,
+      totalAmount: this.total,
+      paymentMethod: $event.method,
+      description: ''
+    }
 
+    console.log(order);
+    
+    
+    this.orderService.save(order).subscribe({
+      next:()=>{
+        this.showPayment = false;
+        this.message.show('Pagamento confirmado!', 'success')
+      },
+      error:()=>{
+        this.message.show('Erro ao realizar pagamento!','error')
+      }
+    });
   }
 }

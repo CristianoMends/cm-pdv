@@ -15,13 +15,26 @@
         </div>
         <div class="input-group">
           <label for="password" class="input-label">Senha</label>
-          <input id="password" type="password" [(ngModel)]="password" name="password" placeholder="Digite sua senha"
-            required minlength="6" class="input-field" #passwordField="ngModel" [disabled]="isLoading">
+          <div style="position: relative;">
+            <input id="password" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password"
+              placeholder="Digite sua senha" required minlength="6" class="input-field" #passwordField="ngModel"
+              [disabled]="isLoading">
+            <button type="button" (click)="showPassword = !showPassword"
+              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+
+              @if (showPassword) {
+              <img class="icon" width="50" height="50" src="https://img.icons8.com/ios/50/hide.png" alt="hide" />
+              }@else {
+              <img class="icon" width="50" height="50" src="https://img.icons8.com/ios/50/visible--v1.png" alt="visible--v1" />
+              }
+            </button>
+          </div>
           <div *ngIf="passwordField.invalid" class="error-message">
             <div *ngIf="passwordField.errors?.['required']">Senha é obrigatória.</div>
             <div *ngIf="passwordField.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres.</div>
           </div>
         </div>
+
 
         <!-- Mensagem de erro se o login falhar -->
         <div *ngIf="isLoginFailed" class="error-message">

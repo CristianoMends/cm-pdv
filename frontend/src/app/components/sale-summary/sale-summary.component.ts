@@ -13,7 +13,7 @@ import ProductItem from '../../interface/ProductItem';
 export class SaleSummaryComponent {
   @Input() productSales: ProductItem[] = [];
   @Output() removeItem = new EventEmitter<number>();
-  @Output() goToPayment = new EventEmitter<void>();
+  @Output() goToPayment = new EventEmitter<number>();
   @Output() updateItemQuantity = new EventEmitter<{ index: number, quantity: number }>();
 
   get subtotal(): number {
@@ -25,7 +25,8 @@ export class SaleSummaryComponent {
   }
 
   proceedToPayment() {
-    this.goToPayment.emit();
+    const total = this.subtotal
+    this.goToPayment.emit(total);
   }
 
   updateQuantity(index: number, event: any) {

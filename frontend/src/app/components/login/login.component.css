@@ -112,7 +112,9 @@ button:disabled{
   
 }
 
-
+.icon{
+  scale: 0.5;
+}
 
 /* Botões */
 .btn {

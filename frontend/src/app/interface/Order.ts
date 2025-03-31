@@ -1,4 +1,5 @@
 import { Customer } from "./Customer";
+import { PaymentMethod } from "./PaymentMethod";
 import ProductItem from "./ProductItem";
 
 export interface Order {
@@ -18,12 +19,4 @@ export interface Order {
   productOrders: ProductItem[];  // Lista de produtos do pedido
 }
 
-export enum PaymentMethod {
-    PIX = "Pix",
-    DEBIT = "Débito",
-    CREDIT = "Crédito",
-    MONEY = "Dinheiro",
-    UNDEFINED = "Indefinido",
-    TICKET = "Boleto"
-  }
-  
+

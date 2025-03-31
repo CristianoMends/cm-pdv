@@ -1,4 +1,4 @@
-<div class="sale-summary">
+<div class="sale-summary container">
     <ul>      
       @for (item of productSales; track $index) {
         <li>
@@ -6,7 +6,7 @@
             <input class="qtd-input" type="number" value="{{item.quantity}}" (change)="updateQuantity($index, $event)">
             x
             R$ {{ item.product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}
-            {{ item.product.name }}
+            {{ item.product.name.substring(0,10) }}
           </div>
           <div>
             
@@ -20,7 +20,7 @@
     </ul>
     <div>
       <div>
-        <h4>{{productSales.length}} itens</h4>
+        <h4>{{productSales.length}} itens selecionados</h4>
         <h2>Total: R$ {{ subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</h2>
       </div>
       <button class="btn-payment" (click)="proceedToPayment()">Ir para pagamento</button>

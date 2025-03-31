@@ -29,7 +29,11 @@ export class LoginComponent implements OnInit {
   @ViewChild('loaderCompo') loader! : ElementRef;
 
   constructor(private authService: AuthService, private router: Router) { }
+  showPassword: boolean = false;
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   async ngOnInit(): Promise<void> {
     if (await this.authService.hasTokenValid()) {
       this.router.navigate(['home'])

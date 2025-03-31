@@ -74,7 +74,7 @@
         </div>
       </div>
 
-
+        
 
       <button type="submit" [disabled]="productForm.invalid">Cadastrar novo Produto</button>
     </form>
@@ -130,9 +130,9 @@
             <img [src]="stock.product.image" alt="Imagem do produto" height="50px">
             {{ stock.product.name }}
           </td>
-          <td>R$ {{ stock.product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          <td>{{ stock.product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
             }}</td>
-          <td>R$ {{ stock.product.cost.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          <td>{{ stock.product.cost.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
             }}</td>
           <td>{{ stock.product.unit }}</td>
           <td>{{ stock.totalEntries }}</td>

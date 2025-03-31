@@ -31,4 +31,8 @@ export class OrderService {
 
     return this.http.get<Order[]>(this.apiUrl, { headers });
   }
+
+  save(order: any) {
+    return this.http.post(this.apiUrl, order);
+  }
 }

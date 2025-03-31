@@ -10,20 +10,6 @@ html {
     background-color: black;
     /* Permite rolagem vertical, mas evita horizontal */
 }
-.section .d1 {
-    display: flex;
-    flex-direction: row;
-    width: 100dvw;
-    height: 100%;
-}
-
-.section .d2 {
-    width: 100%;
-    overflow-y: auto;
-    max-height: 90vh;
-    animation: fadeIn 0.2s ease-in;
-    
-}
 
 .section {
     display: flex;
@@ -32,7 +18,6 @@ html {
     width: 100%;
     background: url('./assets/background.jpg') no-repeat center center fixed;
     background-size: cover;
-    overflow-y: auto;
 }
 
 .section::before {
@@ -49,8 +34,26 @@ html {
 }
 .d1{
     position: relative;
+    display: flex;
+    height: 100%;
+    overflow: hidden;
 }
-
+.d2{
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+}
+.container{
+    position: relative;
+    display: flex;
+    height: 95%;
+}
+.container app-item-selection{
+    width: 60%;
+}
+.container app-sale-summary{
+    width: 40%
+}
 :root {
     --primary-color: linear-gradient(to bottom, #5783fd, #b7c9fc);
 }
