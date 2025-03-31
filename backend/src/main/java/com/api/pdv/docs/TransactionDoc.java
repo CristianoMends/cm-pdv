@@ -37,9 +37,8 @@ public interface TransactionDoc {
             String description,
             LocalDateTime createdAtStart,
             LocalDateTime createdAtEnd,
-            UUID reposnsibleUserId,
-            Long orderId,
-            Long purchaseId
+            UUID responsibleUserId,
+            Long orderId
     );
 }
 

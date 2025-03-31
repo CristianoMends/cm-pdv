@@ -18,7 +18,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             inner join o.productOrders productOrders
             where (:id is null or o.id = :id) 
             and (:customerId is null or o.customer.id = :customerId) 
-            and (:deliveryPersonId is null or o.deliveryPerson.id = :deliveryPersonId) 
             and (:productOrderId is null or productOrders.id = :productOrderId) 
             and (:deliveryStatus is null or o.deliveryStatus = :deliveryStatus) 
             and ((:paidAmountStart is null or :paidAmountEnd is null) or o.paidAmount between :paidAmountStart and :paidAmountEnd) 
@@ -33,7 +32,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> list(
             @Param("id") Long id,
             @Param("customerId") Long customerId,
-            @Param("deliveryPersonId") Long deliveryPersonId,
             @Param("productOrderId") Long productOrderId,
             @Param("deliveryStatus") DeliveryStatus deliveryStatus,
             @Param("paidAmountStart") BigDecimal paidAmountStart,

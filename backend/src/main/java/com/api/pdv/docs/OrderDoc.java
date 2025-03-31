@@ -47,7 +47,6 @@ public interface OrderDoc {
     ResponseEntity<List<ViewOrderDto>> list(
             Long id,
             Long customerId,
-            Long deliveryPersonId,
             Long productOrderId,
             DeliveryStatus status,
             BigDecimal receivedAmountStart,

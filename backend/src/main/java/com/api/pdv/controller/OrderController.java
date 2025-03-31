@@ -38,7 +38,6 @@ public class OrderController implements OrderDoc {
     public ResponseEntity<List<ViewOrderDto>> list(
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) Long customerId,
-            @RequestParam(required = false) Long deliveryPersonId,
             @RequestParam(required = false) Long productOrderId,
             @RequestParam(required = false) DeliveryStatus deliveryStatus,
             @RequestParam(required = false) BigDecimal paidAmountStart,
@@ -57,7 +56,6 @@ public class OrderController implements OrderDoc {
         List<ViewOrderDto> orders = service.list(
                 id,
                 customerId,
-                deliveryPersonId,
                 productOrderId,
                 deliveryStatus,
                 paidAmountStart,

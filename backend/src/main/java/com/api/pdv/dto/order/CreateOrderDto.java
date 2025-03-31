@@ -23,10 +23,6 @@ public class CreateOrderDto {
     @NotNull
     private Long customerId;
 
-    @Schema(description = "Id do entregador atrelado ao pedido", example = "1")
-    @NotNull
-    private Long deliveryPersonId;
-
     @ArraySchema(schema = @Schema(implementation = CreateProductItemDto.class))
     @Schema(description = "Lista de produtos pedidos", example = "[{\"productId\": 1, \"quantity\": 3, \"unitPrice\": 19.99}]")
     @NotNull(message = "Products is mandatory")

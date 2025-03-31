@@ -6,7 +6,6 @@ import com.api.pdv.enumeration.DeliveryStatus;
 import com.api.pdv.enumeration.PaymentMethod;
 import com.api.pdv.enumeration.PaymentStatus;
 import com.api.pdv.model.Customer;
-import com.api.pdv.model.DeliveryPerson;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -59,9 +58,6 @@ public class ViewOrderDto extends ViewTransactableDto {
 
     @Schema(description = "Dados do cliente associado ao pedido")
     private Customer customer;
-
-    @Schema(description = "Dados do entregador responsável pelo pedido")
-    private DeliveryPerson deliveryPerson;
 
     @Schema(description = "Lista de produtos incluídos no pedido",
             implementation = ViewProductItemDto.class)

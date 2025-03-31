@@ -22,10 +22,6 @@ public class Order extends Transactable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "delivery_person_id")
-    private DeliveryPerson deliveryPerson;
-
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductOrder> productOrders;
 
@@ -68,7 +64,6 @@ public class Order extends Transactable {
                 getCanceledAt(),
                 getDescription(),
                 getCustomer(),
-                getDeliveryPerson(),
                 getProductOrders().stream().map(ProductOrder::toView).toList()
         );
     }

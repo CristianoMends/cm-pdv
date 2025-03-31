@@ -53,11 +53,6 @@ public class Transaction {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @ManyToOne
-    @JoinColumn(name = "purchase_id")
-    private Purchase purchase;
-
-
     public Transaction(BigDecimal amount, TransactionType type, PaymentMethod paymentMethod, String description, User responsibleUser, Transactable transactable) {
         this.amount = amount;
         this.type = type;
@@ -67,8 +62,6 @@ public class Transaction {
 
         if (transactable instanceof Order) {
             this.order = (Order) transactable;
-        } else if (transactable instanceof Purchase) {
-            this.purchase = (Purchase) transactable;
         }
     }
 
@@ -95,6 +88,6 @@ public class Transaction {
     }
 
     ViewTransactableDto getViewTransactable() {
-        return purchase != null ? purchase.toView() : order != null ? order.toView() : null;
+        return order != null ? order.toView() : null;
     }
 }

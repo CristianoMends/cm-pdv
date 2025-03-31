@@ -31,9 +31,8 @@ public class TransactionController implements TransactionDoc {
             @RequestParam(required = false) String description,
             @RequestParam(required = false) LocalDateTime createdAtStart,
             @RequestParam(required = false) LocalDateTime createdAtEnd,
-            @RequestParam(required = false) UUID reposnsibleUserId,
-            @RequestParam(required = false) Long orderId,
-            @RequestParam(required = false) Long purchaseId
+            @RequestParam(required = false) UUID responsibleUserId,
+            @RequestParam(required = false) Long orderId
     ) {
 
         List<ViewTransactionDto> transactions = transactionRepository.list(
@@ -44,9 +43,8 @@ public class TransactionController implements TransactionDoc {
                 description,
                 createdAtStart,
                 createdAtEnd,
-                reposnsibleUserId,
-                orderId,
-                purchaseId
+                responsibleUserId,
+                orderId
         ).stream().map(Transaction::toView).toList();
         return ResponseEntity.ok(transactions);
     }
