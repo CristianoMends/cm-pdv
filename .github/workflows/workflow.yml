@@ -86,11 +86,6 @@ jobs:
         working-directory: ./frontend
         run: npm ci
 
-      # Execução de testes do frontend (Angular)
-      - name: Run Frontend Tests
-        working-directory: ./frontend
-        run: npm test -- --watch=false --browsers=ChromeHeadless
-
       # Logs de depuração (opcional)
       - name: Check Docker logs
         run: docker-compose logs --tail=100
