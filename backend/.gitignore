@@ -6,6 +6,7 @@ build/
 uploads/
 
 ### STS ###
+.env
 .apt_generated
 .classpath
 .factorypath
