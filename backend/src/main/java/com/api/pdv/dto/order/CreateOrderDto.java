@@ -20,7 +20,6 @@ import java.util.List;
 @Schema(description = "DTO para criação de um novo Pedido.")
 public class CreateOrderDto {
     @Schema(description = "Id do cliente atrelado ao pedido", example = "1")
-    @NotNull
     private Long customerId;
 
     @ArraySchema(schema = @Schema(implementation = CreateProductItemDto.class))

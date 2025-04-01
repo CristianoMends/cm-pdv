@@ -23,6 +23,9 @@ spring:
   h2:
     console:
       enabled: false  # Desativa o console H2 em staging (não usado aqui)
+file:
+  upload-dir: uploads
+  base-url: http://localhost:8080
 
 default-user:
   password: senha123

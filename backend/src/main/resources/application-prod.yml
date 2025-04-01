@@ -20,9 +20,9 @@ spring:
     baseline-on-migrate: true                                # Força o Flyway a manter o controle de versões no banco
     enabled: true                                            # Habilitar o Flyway para gerenciar migrações
 
-default-user:
-  password: senha123
-  email: usuario@gmail.com
+file:
+  upload-dir: uploads
+  base-url: http://localhost:8080
 
 security:
   config:
