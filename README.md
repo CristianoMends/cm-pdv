@@ -1,31 +1,52 @@
-# CM PDV
+# CM PDV 💻📦📊
 
 O **CM PDV** é um sistema de **Ponto de Venda (PDV)** desenvolvido para gerenciar vendas e produtos em um ambiente comercial. Nesta versão inicial, o sistema permite o **registro de vendas e produtos**, além de possibilitar a visualização de **relatórios de vendas por gráficos**. O objetivo é facilitar o processo de vendas e a análise de desempenho da loja.
 
-## Funcionalidades
+## Tópicos Principais
 
-- **Cadastro de Produtos**: Cadastro de produtos com nome, descrição, preço e quantidade em estoque.
-- **Registro de Vendas**: Realiza o registro de vendas, atualizando o estoque automaticamente.
-- **Relatórios de Vendas**: Exibe gráficos interativos com dados de vendas por período (diário, semanal, mensal).
-- **Controle de Estoque**: Atualiza o estoque dos produtos automaticamente após a realização das vendas.
-- **Autenticação e Autorização**: Sistema de login para garantir que apenas usuários autorizados acessem o sistema.
+1. [Público-Alvo](#público-alvo)
+2. [Funcionalidades](#funcionalidades)
+3. [Tecnologias Utilizadas](#tecnologias-utilizadas)
+4. [Vídeo Demonstrativo](#vídeo-demonstrativo)
 
-## Tecnologias Utilizadas
+## Público-Alvo  
+O **CM PDV** é ideal para:  
+- Pequenos comerciantes.  
+- Lojas de varejo e supermercados.  
+- Restaurantes e lanchonetes que precisam de um sistema ágil de vendas.
 
-- **Frontend**: Angular 17
-- **Backend**: Java 21 com Spring Boot
-- **Banco de Dados**: PostgreSQL
-- **Gerenciamento de Dependências**: Gradle
-- **Containerização**: Docker e Docker Compose
-- **Infraestrutura**: Google Cloud Platform (GCP)
+## Funcionalidades  
 
-## Pré-requisitos
+- **Cadastro de Produtos**: Nome, preço de venda, preço de custo, unidade, categoria, marca e imagem.  
+- **Registro de Vendas**: Atualiza automaticamente o estoque e armazena o histórico de vendas.  
+- **Relatórios de Vendas**: Gráficos interativos com dados detalhados (exemplo: vendas por mês).  
+- **Controle de Estoque**: Gestão automatizada do estoque, evitando inconsistências.  
+- **Autenticação e Autorização**: Login seguro para garantir acesso somente a usuários autorizados.  
 
-Antes de rodar o projeto, é necessário ter as seguintes ferramentas instaladas:
 
-- [Java 21](https://adoptium.net/)
-- [Node.js](https://nodejs.org/)
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Gradle](https://gradle.org/)
-- [PostgreSQL](https://www.postgresql.org/)
+## Tecnologias Utilizadas  
+
+### **Frontend**  
+- **Framework:** Angular 17  
+- **Linguagem:** TypeScript  
+- **Gerenciamento de Pacotes:** npm  
+
+### **Backend**  
+- **Linguagem:** Java 21  
+- **Framework:** Spring  
+- **Gerenciamento de Dependências:** Gradle  
+
+### **Banco de Dados**  
+- **Sistema Gerenciador:** PostgreSQL, H2  
+- **ORM:** Hibernate  
+- **Migrations:** Flyway
+
+### **Infraestrutura e Deploy**
+- **CI/CD:** GitHub Actions  
+- **Containerização:** Docker e Docker Compose
+- **Autenticação e Segurança:** Spring Security, JWT  
+
+## Vídeo Demonstrativo  
+Assista no YouTube 👇
+
+[![Diagrama de Classes](https://0x7zklkxioygivfm.public.blob.vercel-storage.com/project/cmpdv-sXn1OGiszQHD6DnHpGySoLDDSWTeeo.png)](https://youtu.be/sSGYrEz-ZLE)
