@@ -1,0 +1,29 @@
+<section class="section sales">
+    <app-header></app-header>
+    <div class="d1">
+        <app-side-menu [selected]="'sales'"></app-side-menu>
+        <div class="d2">
+            <div class="isload" *ngIf="isLoading; else content">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <ng-template #content>
+                <div class="container">
+                    <app-item-selection [items]="products" (addSale)="addItem($event)"
+                        [selectedItemsMap]="selectedItemsMap">
+                    </app-item-selection>
+                    <app-sale-summary [productSales]="productSales" (updateItemQuantity)="updateQuantity($event)"
+                        (removeItem)="removeItem($event)" 
+                        (goToPayment)="proceedToPayment($event)"></app-sale-summary>
+                </div>
+                <app-message #messageComp title="Erro ao carregar dados!"
+                    message="Ocorreu um problema ao buscar as informações. Por favor, verifique sua conexão com a internet e tente novamente. Se o erro persistir, entre em contato com o suporte."
+                    (okClicked)="onMessageOk()"></app-message>
+
+                @if (showPayment) {
+                <app-payment-section [total]="total" (cancelPayment)="cancelPayment()" (confirmPayment)="confirmPayment($event)"></app-payment-section>
+                }
+
+            </ng-template>
+        </div>
+    </div>
+</section>

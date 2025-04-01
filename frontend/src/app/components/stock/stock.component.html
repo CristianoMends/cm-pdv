@@ -1,0 +1,149 @@
+<div class="stock-container">
+
+  <div class="add-product-form">
+    <h2>Cadastro de produto</h2>
+    <form (ngSubmit)="addProduct()" #productForm="ngForm">
+      <div class="form-group">
+        <label for="productName">Nome do Produto</label>
+        <input type="text" id="productName" [(ngModel)]="newProduct.name" name="name" required #productName="ngModel">
+        <div *ngIf="productName.invalid && productName.touched" class="error">
+          <small *ngIf="productName.errors?.['required']">O nome do produto é obrigatório.</small>
+        </div>
+      </div>
+      <div class="form-group number">
+        <label for="productPrice">Preço de Venda</label>
+        <input type="number" id="productPrice" [(ngModel)]="newProduct.price" name="price" required min="0"
+          #productPrice="ngModel">
+        <div *ngIf="productPrice.invalid && productPrice.touched" class="error">
+          <small *ngIf="productPrice.errors?.['required']">O preço de venda é obrigatório.</small>
+          <small *ngIf="productPrice.errors?.['min']">O preço deve ser maior que 0.</small>
+        </div>
+      </div>
+      <div class="form-group number">
+        <label for="productCost">Preço de Custo</label>
+        <input type="number" id="productCost" [(ngModel)]="newProduct.cost" name="cost" required min="0"
+          #productCost="ngModel">
+        <div *ngIf="productCost.invalid && productCost.touched" class="error">
+          <small *ngIf="productCost.errors?.['required']">O preço de custo é obrigatório.</small>
+          <small *ngIf="productCost.errors?.['min']">O preço de custo deve ser maior que 0.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="productUnit">Unidade</label>
+        <input type="text" id="productUnit" [(ngModel)]="newProduct.unit" name="unit" required #productUnit="ngModel">
+        <div *ngIf="productUnit.invalid && productUnit.touched" class="error">
+          <small *ngIf="productUnit.errors?.['required']">A unidade é obrigatória.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="productCategory">Categoria</label>
+        <select id="productCategory" [(ngModel)]="newProduct.category.id" name="category" required
+          (change)="onCategoryChange(newProduct.category.id)" #productCategory="ngModel">
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          <option value="new" *ngIf="!isAddNewCategory">Adicionar nova categoria...</option>
+        </select>
+        <div *ngIf="productCategory.invalid && productCategory.touched" class="error">
+          <small *ngIf="productCategory.errors?.['required']">A categoria é obrigatória.</small>
+        </div>
+
+        <!-- Campo de entrada para adicionar nova categoria -->
+        <div class="new-category-container" *ngIf="isAddNewCategory">
+          <input type="text" id="newCategory" [(ngModel)]="newCategoryName" name="newCategory"
+            placeholder="Digite o nome da nova categoria" #newCategory="ngModel" required>
+          <div *ngIf="newCategory.invalid && newCategory.touched" class="error">
+            <small *ngIf="newCategory.errors?.['required']">O nome da nova categoria é obrigatório.</small>
+          </div>
+          <button type="button" (click)="addNewCategoryFunction()">Adicionar Nova Categoria</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="productBrand">Marca</label>
+        <input type="text" id="productBrand" [(ngModel)]="newProduct.brand" name="brand" required
+          #productBrand="ngModel">
+        <div *ngIf="productBrand.invalid && productBrand.touched" class="error">
+          <small *ngIf="productBrand.errors?.['required']">A marca é obrigatória.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="productImage">Imagem</label>
+        <input type="file" id="productImage" accept="image/*" (change)="onFileChange($event)" required [(ngModel)]="newProduct.image" name="image" #productImage="ngModel">
+        <div *ngIf="productImage.errors?.['required'] && productImage.touched" class="error">
+          <small *ngIf="productImage.errors?.['required']">A imagem do produto é obrigatória.</small>
+        </div>
+      </div>
+
+        
+
+      <button type="submit" [disabled]="productForm.invalid">Cadastrar novo Produto</button>
+    </form>
+  </div>
+
+  <div class="add-stock-form">
+    <h2>Adicionar ao Estoque</h2>
+    <form (ngSubmit)="addStock()" #stockForm="ngForm">
+      <div class="form-group">
+        <label for="stockProduct">Produto</label>
+        <select id="stockProduct" [(ngModel)]="newStock.productId" name="product" required #stockProduct="ngModel">
+          <option *ngFor="let product of productList" [value]="product.id">{{ product.name }}</option>
+        </select>
+        <div *ngIf="stockProduct.invalid && stockProduct.touched" class="error">
+          <small *ngIf="stockProduct.errors?.['required']">O produto é obrigatório.</small>
+        </div>
+      </div>
+      <div class="form-group number">
+        <label for="stockQuantity">Quantidade</label>
+        <input type="number" id="stockQuantity" [(ngModel)]="newStock.quantity" name="quantity" required min="1"
+          #stockQuantity="ngModel">
+        <div *ngIf="stockQuantity.invalid && stockQuantity.touched" class="error">
+          <small *ngIf="stockQuantity.errors?.['required']">A quantidade é obrigatória.</small>
+          <small *ngIf="stockQuantity.errors?.['min']">A quantidade deve ser maior que 0.</small>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="stockForm.invalid">Adicionar ao Estoque</button>
+    </form>
+  </div>
+
+
+  <div class="stock-list">
+    <h2>Estoque</h2>
+    <table class="stock-table">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço</th>
+          <th>Custo</th>
+          <th>Unidade</th>
+          <th>Entradas</th>
+          <th>Saídas</th>
+          <th>Quantidade Atual</th>
+          <th>Categoria</th>
+          <th>Marca</th>
+          <th>Data de Registro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stockList">
+          <td>
+            <img [src]="stock.product.image" alt="Imagem do produto" height="50px">
+            {{ stock.product.name }}
+          </td>
+          <td>{{ stock.product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+            }}</td>
+          <td>{{ stock.product.cost.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+            }}</td>
+          <td>{{ stock.product.unit }}</td>
+          <td>{{ stock.totalEntries }}</td>
+          <td>{{ stock.totalWithdrawals }}</td>
+          <td>{{ stock.currentQuantity }}</td>
+          <td>{{ stock.product.category.name }}</td>
+          <td>{{ stock.product.brand }}</td>
+          <td>{{ stock.product.createdAt | date: 'medium' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

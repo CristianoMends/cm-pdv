@@ -1,0 +1,96 @@
+name: continuous-integration
+
+
+on:
+  push:
+    branches:
+      - staging
+      - develop
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci-pipeline:
+    runs-on: ubuntu-latest
+    env:
+      SPRING_PROFILES_ACTIVE: ${{ secrets.SPRING_PROFILES_ACTIVE }}
+      DB_URL: ${{ secrets.DB_URL }}
+      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+      JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
+
+    steps:
+      # Checkout do código-fonte
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # Configuração de cache para Gradle
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Instalação do Java 21
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      # Instalação do Docker Compose
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      # Início dos serviços com Docker Compose utilizando o arquivo .env
+      - name: Start Docker Compose
+        run: docker-compose up --build -d
+
+      # Aguarda que os serviços estejam prontos
+      - name: Wait for services to be ready
+        run: |
+          timeout 300 bash -c '
+          until echo > /dev/tcp/localhost/8080; do
+            echo "Waiting for API service..."
+            sleep 2
+          done
+          echo "API service is ready!"'
+
+      # Concede permissão de execução ao script Gradle Wrapper
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./backend/gradlew
+
+      # Execução de testes da API usando Gradle
+      - name: Run API Tests
+        working-directory: ./backend
+        run: ./gradlew test
+
+      # Instalação do Node.js para rodar testes do Angular
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: ./frontend/package-lock.json
+
+      # Instalação das dependências do frontend
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      # Logs de depuração (opcional)
+      - name: Check Docker logs
+        run: docker-compose logs --tail=100
+
+      # Derrubar os containers ao final do pipeline
+      - name: Stop Docker Compose
+        if: always()
+        run: docker-compose down

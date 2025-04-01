@@ -1,0 +1,26 @@
+<div class="payment-section-overlay">
+  <div class="payment-section container">
+    <h2>Pagamento</h2>
+    <p>Total a pagar: <strong>R$ {{ total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</strong></p>
+
+    <label for="payment-method">Escolha o método de pagamento:</label>
+    <select id="payment-method" [(ngModel)]="paymentMethod" (change)="calculateChange()">
+      <option value="MONEY">Dinheiro</option>
+      <option value="CREDIT">Cartão de Crédito</option>
+      <option value="DEBIT">Cartão de Débito</option>
+      <option value="PIX">PIX</option>
+    </select>
+
+    <div *ngIf="paymentMethod === 'MONEY'">
+      <input placeholder="Valor recebido" id="received-amount" type="number" [(ngModel)]="receivedAmount" (input)="calculateChange()" />
+      <p *ngIf="receivedAmount! >= total">Troco: <strong>R$ {{ change.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</strong></p>
+    </div>
+
+    <div class="payment-buttons">
+      <button class="btn-confirm" (click)="confirm()">Confirmar Pagamento</button>
+      <button class="btn-cancel" (click)="cancel()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<app-message #messageComp></app-message>

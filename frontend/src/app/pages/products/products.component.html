@@ -1,0 +1,22 @@
+<section class="section products">
+    <app-header></app-header>
+    <div class="d1">
+        <app-side-menu [selected]="'products'"></app-side-menu>
+        <div class="d2">
+            <div class="isload" *ngIf="isLoading; else content">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <ng-template #content>
+                <app-stock #stockComp 
+                [productList]="productList" 
+                [stockList]="stockList"
+                [categories]="categories"
+                (addProductToStock)="addProduct($event)" 
+                (addNewProduct)="addNewProduct($event)"
+                (addNewCategory)="addNewCategory($event)"
+                ></app-stock>
+                <app-message #messageComp title="Erro ao carregar dados!"></app-message>
+            </ng-template>
+        </div>
+    </div>
+</section>

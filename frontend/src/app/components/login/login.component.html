@@ -1,0 +1,127 @@
+<div class="login-container">
+
+  <div *ngIf="isLogin; else registerMode">
+    <div class="login-card login-mode">
+      <h2 class="login-title">Bem Vindo ao CMPDV</h2>
+      <form (ngSubmit)="onLogin()" class="login-form" #loginForm="ngForm">
+        <div class="input-group">
+          <label for="email" class="input-label">Email</label>
+          <input id="email" type="email" [(ngModel)]="email" name="email" placeholder="Digite seu email" required email
+            class="input-field" #emailField="ngModel" [disabled]="isLoading">
+          <div *ngIf="emailField.invalid && emailField.touched" class="error-message">
+            <div *ngIf="emailField.errors?.['required']">Email é obrigatório.</div>
+            <div *ngIf="emailField.errors?.['email']">Email inválido.</div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="password" class="input-label">Senha</label>
+          <div style="position: relative;">
+            <input id="password" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password"
+              placeholder="Digite sua senha" required minlength="6" class="input-field" #passwordField="ngModel"
+              [disabled]="isLoading">
+            <button type="button" (click)="showPassword = !showPassword"
+              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+
+              @if (showPassword) {
+              <img class="icon" width="50" height="50" src="https://img.icons8.com/ios/50/hide.png" alt="hide" />
+              }@else {
+              <img class="icon" width="50" height="50" src="https://img.icons8.com/ios/50/visible--v1.png" alt="visible--v1" />
+              }
+            </button>
+          </div>
+          <div *ngIf="passwordField.invalid" class="error-message">
+            <div *ngIf="passwordField.errors?.['required']">Senha é obrigatória.</div>
+            <div *ngIf="passwordField.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres.</div>
+          </div>
+        </div>
+
+
+        <!-- Mensagem de erro se o login falhar -->
+        <div *ngIf="isLoginFailed" class="error-message">
+          <p>Seu email ou senha estão incorretos</p>
+        </div>
+
+        <button type="submit" class="btn btn-login" [disabled]="loginForm.invalid || isLoading">Entrar</button>
+      </form>
+      <div class="input-group">
+        <label for="rememberMe" class="input-label">
+          <input [disabled]="isLoading" type="checkbox" id="rememberMe" [(ngModel)]="rememberMe" name="rememberMe" />
+          Manter-me conectado
+        </label>
+      </div>
+
+      <div class="signup-option"></div>
+      <span class="signup-text">Não tem conta?</span>
+      <button [disabled]="isLoading" type="button" (click)="toggleForm()" class="btn btn-signup">Cadastre-se</button>
+    </div>
+  </div>
+
+
+  <ng-template #registerMode>
+    <div class="login-card register-mode">
+      <h2 class="register-title">Crie sua conta</h2>
+      <form (ngSubmit)="onRegister()" class="register-form" #registerForm="ngForm">
+        <div class="input-group">
+          <label for="firstName" class="input-label">Nome</label>
+          <input id="firstName" type="text" [(ngModel)]="firstName" name="firstName" placeholder="Digite seu nome"
+            required class="input-field" #firstNameField="ngModel" [disabled]="isLoading">
+          <div *ngIf="firstNameField.invalid && firstNameField.touched" class="error-message">
+            <div *ngIf="firstNameField.errors?.['required']">Nome é obrigatório.</div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="lastName" class="input-label">Sobrenome</label>
+          <input id="lastName" type="text" [(ngModel)]="lastName" name="lastName" placeholder="Digite seu sobrenome"
+            required class="input-field" #lastNameField="ngModel" [disabled]="isLoading">
+          <div *ngIf="lastNameField.invalid && lastNameField.touched" class="error-message">
+            <div *ngIf="lastNameField.errors?.['required']">Sobrenome é obrigatório.</div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="email" class="input-label">Email</label>
+          <input id="email" type="email" [(ngModel)]="email" name="email" placeholder="Digite seu email" required email
+            class="input-field" #registerEmailField="ngModel" [disabled]="isLoading">
+          <div *ngIf="registerEmailField.invalid && registerEmailField.touched" class="error-message">
+            <div *ngIf="registerEmailField.errors?.['required']">Email é obrigatório.</div>
+            <div *ngIf="registerEmailField.errors?.['email']">Email inválido.</div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="phone" class="input-label">Telefone</label>
+          <input id="phone" type="tel" [(ngModel)]="phone" name="phone" placeholder="Digite seu telefone" required
+            pattern="^\d{10,11}$" class="input-field" #phoneField="ngModel" [disabled]="isLoading">
+          <div *ngIf="phoneField.invalid && phoneField.touched" class="error-message">
+            <div *ngIf="phoneField.errors?.['required']">Telefone é obrigatório.</div>
+            <div *ngIf="phoneField.errors?.['pattern']">Telefone inválido.</div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="password" class="input-label">Senha</label>
+          <input id="password" type="password" [(ngModel)]="password" name="password" placeholder="Digite sua senha"
+            required minlength="6" class="input-field" #registerPasswordField="ngModel" [disabled]="isLoading">
+          <div *ngIf="registerPasswordField.invalid && registerPasswordField.touched" class="error-message">
+            <div *ngIf="registerPasswordField.errors?.['required']">Senha é obrigatória.</div>
+            <div *ngIf="registerPasswordField.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres.</div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="confirmPassword" class="input-label">Confirmar Senha</label>
+          <input id="confirmPassword" type="password" [(ngModel)]="confirmPassword" name="confirmPassword"
+            placeholder="Confirme sua senha" required class="input-field" #confirmPasswordField="ngModel"
+            [disabled]="isLoading">
+          <div *ngIf="confirmPasswordField.touched" class="error-message">
+            <div *ngIf="confirmPasswordField.errors?.['required']">Confirmação de senha é obrigatória.</div>
+            <div *ngIf="password !== confirmPassword">As senhas não coincidem.</div>
+          </div>
+        </div>
+        <button [disabled]="isLoading" type="submit" class="btn btn-register"
+          [disabled]="registerForm.invalid">Registrar</button>
+      </form>
+      <div class="signup-option">
+        <span class="signup-text">Já tem conta?</span>
+        <button [disabled]="isLoading" type="button" (click)="toggleForm()" class="btn btn-signup">Entre</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <app-loading-spinner *ngIf="isLoading" #loaderComp></app-loading-spinner>

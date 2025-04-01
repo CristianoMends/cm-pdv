@@ -1,0 +1,13 @@
+<div *ngIf="containerVisible" class="container" #container>
+
+  @if (messageType === 'error') {
+  <img src="./../../../assets/error.png" alt="Erro">
+  }@else if (messageType === 'success') {
+  <img src="./../../../assets/success.png" alt="Sucesso">
+  }@else{
+  <img src="./../../../assets/info.png" alt="Informação">
+  }
+
+  <p>{{ message }}</p>
+  <button (click)="hide()">{{ buttonLabel }}</button>
+</div>

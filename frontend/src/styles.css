@@ -1,0 +1,132 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: black;
+    /* Permite rolagem vertical, mas evita horizontal */
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    width: 100%;
+    background: url('./assets/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.938);
+}
+.header{
+    position: relative;
+}
+.d1{
+    position: relative;
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+}
+.d2{
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+}
+.container{
+    position: relative;
+    display: flex;
+    height: 95%;
+}
+.container app-item-selection{
+    width: 60%;
+}
+.container app-sale-summary{
+    width: 40%
+}
+:root {
+    --primary-color: linear-gradient(to bottom, #5783fd, #b7c9fc);
+}
+input {
+    -moz-appearance: textfield;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input:focus {
+    outline: none;
+    border-color: #5783fd;
+}
+
+/* Barra de rolagem */
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #1b3fa3bb;
+    border-radius: 10px;
+}
+
+
+
+/* Impede a seleção de texto em toda a página */
+* {
+    user-select: none;
+}
+
+/* Permite a seleção de texto em campos de entrada, áreas de texto, e links */
+input,
+textarea,
+a {
+    user-select: text;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.isload {
+    height: 100%;
+}
+
+/* Ajuste geral para mobile */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+        /* Evita problemas no mobile */
+    }
+
+    .section {
+        padding: 1rem;
+    }
+}

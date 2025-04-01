@@ -1,0 +1,191 @@
+.stock-container {
+  padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+}
+
+.stock-table th,
+.stock-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.stock-table th {
+  background-color: #194267;
+  color: white;
+}
+
+.stock-table td img {
+  margin-right: 10px;
+  border-radius: 4px;
+  mix-blend-mode: multiply;
+}
+
+.stock-table td {
+  vertical-align: middle;
+}
+
+.stock-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/*estilo do form*/
+.add-product-form,
+.add-stock-form {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  width: 100%;
+  margin: 1%;
+}
+
+
+.stock-list {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border-radius: 10px;
+  width: 100%;
+  margin: 1.4%;
+}
+
+.stock-list h2 {
+  padding: 10px 20px;
+}
+
+.add-product-form form,
+.add-stock-form form {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.add-product-form h3,
+.add-stock-form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-product-form .form-group,
+.add-stock-form .form-group {
+  margin-bottom: 15px;
+  width: 45%;
+  height: max-content;
+}
+
+.add-product-form label,
+.add-stock-form label {
+  display: block;
+  font-weight: bold;
+}
+
+.add-product-form button[type="submit"],
+.add-stock-form button[type="submit"] {
+  margin: 0 40%;
+  height: max-content;
+}
+
+.add-product-form button:hover,
+.add-stock-form button:hover {
+  background-color: #333;
+}
+
+.add-product-form input[type="file"],
+.add-stock-form input[type="file"] {
+  cursor: pointer;
+  font-size: small;
+}
+.add-stock-form{
+  height: max-content;
+}
+
+.add-product-form .number, .add-stock-form .number {
+  width: 20%;
+}
+
+.add-product-form input[type="file"]::-webkit-file-upload-button,
+.add-stock-form input[type="file"]::-webkit-file-upload-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.add-product-form input[type="file"]:hover,
+.add-stock-form input[type="file"]:hover {
+  background-color: #333;
+  color: #ddd;
+}
+
+.add-product-form input[type="file"]:hover::-webkit-file-upload-button,
+.add-stock-form input[type="file"]:hover::-webkit-file-upload-button {
+  color: #ddd;
+}
+
+.new-category-container {
+  margin-top: 10px;
+  width: 100%;
+  animation: fadeIn 0.5s;
+}
+.new-category-container input{
+  width: -webkit-fill-available;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+input, select, button {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+button {
+  color: #ddd;
+  background-color: #194267;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.stock-table td:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stock-table td:first-child img {
+  margin-bottom: 5px;
+  display: block;
+}
