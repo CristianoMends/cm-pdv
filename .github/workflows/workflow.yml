@@ -81,11 +81,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./frontend/package-lock.json
 
-      # Instalação das dependências do frontend
-      - name: Install Frontend Dependencies
-        working-directory: ./frontend
-        run: npm ci
-
       # Logs de depuração (opcional)
       - name: Check Docker logs
         run: docker-compose logs --tail=100
